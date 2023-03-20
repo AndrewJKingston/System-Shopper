@@ -65,5 +65,12 @@
     <Build Include="dbo\Tables\Product.sql" />
     <Build Include="dbo\Tables\Discount.sql" />
     <Build Include="dbo\Tables\Manufacturer.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\ShoppingSession.sql" />
+    <Build Include="dbo\Tables\ProductType.sql" />
+    <Build Include="dbo\Tables\PaymentDetails.sql" />
+    <Build Include="dbo\Tables\OrderItems.sql" />
+    <Build Include="dbo\Tables\OrderDetails.sql" />
+    <Build Include="dbo\Tables\Cart.sql" />
   </ItemGroup>
 </Project>
