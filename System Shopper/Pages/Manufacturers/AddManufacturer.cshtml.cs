@@ -9,40 +9,48 @@ namespace System_Shopper.Pages
     {
         [BindProperty]
         public Manufacturer NewManufacturer { get; set; } = new Manufacturer();
-
+        
         public void OnGet()
         {
         }
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            /*
-             * 1. Create a SQL connection object
-             * 2. Construct a SQL statement
-             * 3. Create a SQL command object
-             * 4. Open the SQL connection
-             * 5. Execute the SQL command
-             * 6. Close the SQL connection
-             */
+            if (ModelState.IsValid)
+            {
+                /*
+                 * 1. Create a SQL connection object
+                 * 2. Construct a SQL statement
+                 * 3. Create a SQL command object
+                 * 4. Open the SQL connection
+                 * 5. Execute the SQL command
+                 * 6. Close the SQL connection
+                 */
 
-            // Step 1
-            SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString());
+                // Step 1
+                using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+                {
+                    // Step 2
+                    string sql = "INSERT INTO Manufacturer(ManufacturerName, ManufacturerBio, ManufacturerLogo) " +
+                        "VALUES(@manufacturerName, @manufacturerBio, @manufacturerLogo)";
 
-            // Step 2
-            string sql = "INSERT INTO Manufacturer(ManufacturerName) " +
-                "VALUES(@manufacturerName)";
+                    // Step 3
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@manufacturerName", NewManufacturer.ManufacturerName);
+                    cmd.Parameters.AddWithValue("@manufacturerBio", NewManufacturer.ManufacturerBio);
+                    cmd.Parameters.AddWithValue("@manufacturerLogo", NewManufacturer.ManufacturerLogo);
 
-            // Step 3
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@manufacturerName", NewManufacturer.ManufacturerName);
+                    // Step 4
+                    conn.Open();
 
-            // Step 4
-            conn.Open();
-
-            // Step 5
-            cmd.ExecuteNonQuery();
-
-            // Step 6
-            conn.Close();
+                    // Step 5
+                    cmd.ExecuteNonQuery();
+                }
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }

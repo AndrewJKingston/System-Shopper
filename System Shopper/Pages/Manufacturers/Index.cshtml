@@ -3,6 +3,38 @@
 @{
 }
 
-<div>
-    <p>Manufacturer Page</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2>Manufacturer List</h2>
+        </div>
+        <div class="col-sm-9">
+            <a class="btn btn-primary" asp-page="AddManufacturer">Add Manufacturer</a>
+        </div>
+    </div>
+
+    @foreach (var manufacturer in Model.ManufacturerList)
+    {
+        <!--Manufacturer List-->
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <img class="img-fluid" src="@manufacturer.ManufacturerLogo" alt="Company Logo"/> <!-- Manufacturer image goes here -->
+            </div>
+            <!-- Manufacturer Information -->
+            <div class="col-sm-9">
+                <!-- Manufacturer Name -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        @manufacturer.ManufacturerName
+                    </div>
+                </div>
+                <!-- Manufacturer Bio -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        @manufacturer.ManufacturerBio
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

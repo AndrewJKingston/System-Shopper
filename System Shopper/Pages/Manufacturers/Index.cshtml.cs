@@ -7,6 +7,9 @@ namespace System_Shopper.Pages.Manufacturers
 {
     public class IndexModel : PageModel
     {
+        [BindProperty]
+        public List<Manufacturer> ManufacturerList { get; set; } = new List<Manufacturer>();
+
         public void OnGet()
         {
             /*
@@ -19,23 +22,32 @@ namespace System_Shopper.Pages.Manufacturers
              */
 
             // Step 1
-            SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString());
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                // Step 2
+                string sql = "SELECT * FROM Manufacturer ORDER BY ManufacturerName";
 
-            // Step 2
-            string sql = "SELECT * FROM Manufacturer ORDER BY ManufacturerName";
+                // Step 3
+                SqlCommand cmd = new SqlCommand(sql, conn);
 
-            // Step 3
-            SqlCommand cmd = new SqlCommand(sql, conn);
+                // Step 4
+                conn.Open();
 
-            // Step 4
-            conn.Open();
-
-            // Step 5
-            cmd.ExecuteNonQuery();
-
-            // Step 6
-            conn.Close();
-
+                // Step 5
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Manufacturer manufacturer = new Manufacturer();
+                        manufacturer.ManufacturerName = reader["ManufacturerName"].ToString();
+                        manufacturer.ManufacturerBio = reader["ManufacturerBio"].ToString();
+                        manufacturer.ManufacturerId = int.Parse(reader["ManufacturerId"].ToString());
+                        manufacturer.ManufacturerLogo = reader["ManufacturerLogo"].ToString();
+                        ManufacturerList.Add(manufacturer);
+                    }
+                }
+            }
         }
     }
 }

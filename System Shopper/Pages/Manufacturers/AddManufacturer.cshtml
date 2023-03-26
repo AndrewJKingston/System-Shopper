@@ -4,11 +4,23 @@
     ViewData["Title"] = "Add Product";
 }
 
-<form action="post">
+<form method="post">
     <div class="row mb-3">
         <label for="inputManufacturerName" class="col-sm-2 col-form-label">Manufacturer Name:</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputManufacturerName" asp-for="NewManufacturer.ManufacturerName" />
+            <input type="text" rows="3" class="form-control" id="inputManufacturerName" asp-for="NewManufacturer.ManufacturerName" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputManufacturerBio" class="col-sm-2 col-form-label">Manufacturer Bio:</label>
+        <div class="col-sm-10">
+            <textarea rows="3" class="form-control" id="inputManufacturerBio" asp-for="NewManufacturer.ManufacturerBio"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputManufacturerLogo" class="col-sm-2 col-form-label">Manufacturer Logo:</label>
+        <div class="col-sm-10">
+            <textarea type="text" class="form-control" id="inputManufacturerLogo" asp-for="NewManufacturer.ManufacturerLogo"></textarea>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Add Manufacturer</button>
