@@ -26,7 +26,7 @@
     <div class="row mb-3">
         <label for="inputManufacturerId" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select type="text" class="form-control" id="inputManufacturerId" asp-for="@Model.Item1.NewProduct.ManufacturerId">
+            <select class="form-control" id="inputManufacturerId" asp-for="@Model.Item1.NewProduct.ManufacturerId">
                 @foreach (var manufacturer in @Model.Item2.ManufacturerList)
                 {
                     <option value="manufacturer.ManufacturerId">Manufacturer.ManufacturerName</option>
