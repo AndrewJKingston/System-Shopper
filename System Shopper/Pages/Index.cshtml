@@ -1,10 +1,50 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome to System_Shopper!</h1>
     <p>This is the main product page for System Shopper.</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2 style="color: #1D2F6F">Featured Products</h2>
+        </div>
+    </div>
+
+    @foreach (var product in Model.ProductList)
+    {
+        <!--Product List-->
+        <div style="border-style: solid; border-color: #1D2F6F" class="row mb-3 p-2 rounded">
+            <div class="col-sm-3">
+                <img style="width: 200px;" class="img-fluid" src="@product.ProductImage" alt="Product Image" /> <!-- Manufacturer image goes here -->
+            </div>
+            <!-- Product Information -->
+            <div class="col-sm-9">
+                <!-- Product Name and Price-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>@product.ProductName</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>@product.Price</h5>
+                    </div>
+                </div>
+                <!-- Product Bio -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        @product.ProductDescription
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        <a style="background-color: #FAC748;" class="btn" asp-page="AddProduct">Add Product</a>
+    </div>
+
 </div>

@@ -13,6 +13,7 @@ namespace System_Shopper.Pages
         public void OnGet()
         {
         }
+
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)

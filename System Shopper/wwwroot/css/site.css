@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+* {
+    color: #1D2F6F;
+    border-color: #1D2F6F;
+}

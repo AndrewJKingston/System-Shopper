@@ -1,31 +1,32 @@
 ﻿@page
 @model System_Shopper.Pages.Manufacturers.IndexModel
 @{
+    ViewData["Title"] = "Manufacturers";
 }
 
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <h2>Manufacturer List</h2>
+            <h2 style="color: #1D2F6F">Manufacturers</h2>
         </div>
         <div class="col-sm-9">
-            <a class="btn btn-primary" asp-page="AddManufacturer">Add Manufacturer</a>
+            <a style="background-color: #FAC748;" class="btn" asp-page="AddManufacturer">Add Manufacturer</a>
         </div>
     </div>
 
     @foreach (var manufacturer in Model.ManufacturerList)
     {
         <!--Manufacturer List-->
-        <div class="row mb-3">
-            <div class="col-sm-3">
-                <img class="img-fluid" src="@manufacturer.ManufacturerLogo" alt="Company Logo"/> <!-- Manufacturer image goes here -->
+        <div style="border-style: solid; border-color: #1D2F6F" class="row mb-3 p-2 rounded">
+            <div style="display: flex; justify-content: center; align-items: center;"class="col-sm-3">
+                <img style="width: 200px;" class="img-fluid" src="@manufacturer.ManufacturerLogo" alt="Company Logo"/> <!-- Manufacturer image goes here -->
             </div>
             <!-- Manufacturer Information -->
-            <div class="col-sm-9">
+            <div style="border-left-style: solid; border-color: #8390FA" class="col-sm-9">
                 <!-- Manufacturer Name -->
                 <div class="row">
                     <div class="col-sm-12">
-                        @manufacturer.ManufacturerName
+                        <h4>@manufacturer.ManufacturerName</h4>
                     </div>
                 </div>
                 <!-- Manufacturer Bio -->

@@ -1,27 +1,27 @@
 ﻿@page
 @model System_Shopper.Pages.AddManufacturerModel
 @{
-    ViewData["Title"] = "Add Product";
+    ViewData["Title"] = "Add Manufacturer";
 }
 
 <form method="post">
     <div class="row mb-3">
-        <label for="inputManufacturerName" class="col-sm-2 col-form-label">Manufacturer Name:</label>
+        <label for="inputManufacturerName" class="col-sm-2 col-form-label"><b>Manufacturer Name:</b></label>
         <div class="col-sm-10">
             <input type="text" rows="3" class="form-control" id="inputManufacturerName" asp-for="NewManufacturer.ManufacturerName" />
         </div>
     </div>
     <div class="row mb-3">
-        <label for="inputManufacturerBio" class="col-sm-2 col-form-label">Manufacturer Bio:</label>
+        <label for="inputManufacturerBio" class="col-sm-2 col-form-label"><b>Manufacturer Bio:</b></label>
         <div class="col-sm-10">
             <textarea rows="3" class="form-control" id="inputManufacturerBio" asp-for="NewManufacturer.ManufacturerBio"></textarea>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="inputManufacturerLogo" class="col-sm-2 col-form-label">Manufacturer Logo:</label>
+        <label for="inputManufacturerLogo" class="col-sm-2 col-form-label"><b>Manufacturer Logo:</b></label>
         <div class="col-sm-10">
             <textarea type="text" class="form-control" id="inputManufacturerLogo" asp-for="NewManufacturer.ManufacturerLogo"></textarea>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Add Manufacturer</button>
+    <button type="submit" style="background-color: #FAC748;" class="btn">Add Manufacturer</button>
 </form>
