@@ -17,8 +17,8 @@
     @foreach (var manufacturer in Model.ManufacturerList)
     {
         <!--Manufacturer List-->
-        <div style="border-style: solid; border-color: #1D2F6F" class="row mb-3 p-2 rounded">
-            <div style="display: flex; justify-content: center; align-items: center;"class="col-sm-3">
+        <div style="border-style: solid; border-color: #1D2F6F;" class="row mb-3 p-2 rounded">
+            <div style="display: flex; justify-content: center; align-items: center;" class="col-sm-3">
                 <img style="width: 200px;" class="img-fluid" src="@manufacturer.ManufacturerLogo" alt="Company Logo"/> <!-- Manufacturer image goes here -->
             </div>
             <!-- Manufacturer Information -->
@@ -36,10 +36,20 @@
                     </div>
                 </div>
             </div>
+            <!-- Spacer -->
+            <div class="col-sm-2"></div>
             <!-- Edit and Delete Buttons-->
-            <div class="col-sm-3">
-                <a style="background-color: #FAC748;" asp-page="EditManufacturer" asp-route-id="manufacturer.ManufacturerId" class="btn mb-3">Edit Manufacturer</a>
-                <a asp-page="DeleteManufacturer" class="btn btn-danger">Delete Manufacturer</a>
+            <div style="border-left-style: solid; border-color: #8390FA; display: block; align-items: stretch;" class="col-sm-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a style="background-color: #FAC748;" asp-page="EditManufacturer" asp-route-id="@manufacturer.ManufacturerId" class="btn mb-3">Edit</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a asp-page="DeleteManufacturer"  class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
             </div>
         </div>
     }

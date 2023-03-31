@@ -24,28 +24,31 @@
         return isValid;
     }
 </script>
-<!--
+
 <form method="post">
+    <div>
+        <h2>Edit Manufacturer</h2>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row mb-3">
-        <label for="inputManufacturerName" class="col-sm-2 col-form-label font-weight-bold" asp-for="NewManufacturer.ManufacturerName"></label>
+        <label for="inputManufacturerName" class="col-sm-2 col-form-label font-weight-bold" asp-for="ExistingManufacturer.ManufacturerName"></label>
         <div class="col-sm-10">
-            <input type="text" rows="3" class="form-control" id="inputManufacturerName" asp-for="NewManufacturer.ManufacturerName" />
-            <span asp-validation-for="NewManufacturer.ManufacturerName" class="text-danger" id="manufacturerNameError"></span>
+            <input type="text" rows="3" class="form-control" id="inputManufacturerName" value="@Model.ExistingManufacturer.ManufacturerName" asp-for="ExistingManufacturer.ManufacturerName" />
+            <span asp-validation-for="ExistingManufacturer.ManufacturerName" class="text-danger" id="manufacturerNameError"></span>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="inputManufacturerBio" class="col-sm-2 col-form-label font-weight-bold" asp-for="NewManufacturer.ManufacturerBio"></label>
+        <label for="inputManufacturerBio" class="col-sm-2 col-form-label font-weight-bold" asp-for="ExistingManufacturer.ManufacturerBio"></label>
         <div class="col-sm-10">
-            <textarea rows="3" class="form-control" id="inputManufacturerBio" asp-for="NewManufacturer.ManufacturerBio"></textarea>
-            <span asp-validation-for="NewManufacturer.ManufacturerBio" class="text-danger" id="manufacturerBioError"></span>
+            <textarea rows="3" class="form-control" id="inputManufacturerBio" value="@Model.ExistingManufacturer.ManufacturerBio" asp-for="ExistingManufacturer.ManufacturerBio"></textarea>
+            <span asp-validation-for="ExistingManufacturer.ManufacturerBio" class="text-danger" id="manufacturerBioError"></span>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="inputManufacturerLogo" class="col-sm-2 col-form-label font-weight-bold" asp-for="NewManufacturer.ManufacturerLogo"></label>
+        <label for="inputManufacturerLogo" class="col-sm-2 col-form-label font-weight-bold" asp-for="ExistingManufacturer.ManufacturerLogo"></label>
         <div class="col-sm-10">
-            <textarea type="text" class="form-control" id="inputManufacturerLogo" asp-for="NewManufacturer.ManufacturerLogo"></textarea>
+            <textarea type="text" class="form-control" id="inputManufacturerLogo" value="@Model.ExistingManufacturer.ManufacturerLogo" asp-for="ExistingManufacturer.ManufacturerLogo"></textarea>
         </div>
     </div>
-    <button type="submit" style="background-color: #FAC748;" class="btn" onclick="return validateInput()">Add Manufacturer</button>
+    <button type="submit" style="background-color: #FAC748;" class="btn" onclick="return validateInput()">Edit Manufacturer</button>
 </form>
--->
