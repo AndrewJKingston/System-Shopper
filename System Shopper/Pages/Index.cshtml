@@ -1,21 +1,26 @@
-﻿@page
+﻿    @page
 @model IndexModel
 @{
     ViewData["Title"] = "Home Page";
 }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
+<!--
 <div class="text-center">
     <h1 class="display-4">Welcome to System_Shopper!</h1>
     <p>This is the main product page for System Shopper.</p>
+</div> -->
+<div class="text-center">
+    <h1 class="display-4"><i class="bi bi-motherboard"></i> Welcome to System_Shopper!</h1>
+    <p>This is the main product page for System Shopper.</p>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
             <h2 style="color: #1D2F6F">Featured Products</h2>
         </div>
     </div>
-
+   
     @foreach (var product in Model.ProductList)
     {
         <!--Product List-->
@@ -46,5 +51,4 @@
     <div>
         <a style="background-color: #FAC748;" class="btn" asp-page="AddProduct">Add Product</a>
     </div>
-
-</div>
+   
