@@ -1,0 +1,54 @@
+﻿@page
+@model System_Shopper.Pages.Manufacturers.EditManufacturerModel
+@{
+    ViewData["Title"] = "Edit Manufacturer";
+}
+
+<script type="text/javascript">
+    function validateInput()
+    {
+        var isValid = true;
+        var manufacturerName = document.getElementById("inputManufacturerName");
+        var manufacturerBio = document.getElementById("inputManufacturerBio");
+
+        if (manufacturerName.value == "")
+        {
+            isValid = false;
+            document.getElementById("manufacturerNameError").innerHTML = "This field is required.";
+        }
+        if (manufacturerBio.value == "") {
+            isValid = false;
+            document.getElementById("manufacturerBioError").innerHTML = "This field is required.";
+        }
+
+        return isValid;
+    }
+</script>
+
+<form method="post">
+    <div>
+        <h2>Edit Manufacturer</h2>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row mb-3">
+        <label for="inputManufacturerName" class="col-sm-2 col-form-label font-weight-bold" asp-for="ExistingManufacturer.ManufacturerName"></label>
+        <div class="col-sm-10">
+            <input type="text" rows="3" class="form-control" id="inputManufacturerName" value="@Model.ExistingManufacturer.ManufacturerName" asp-for="ExistingManufacturer.ManufacturerName" />
+            <span asp-validation-for="ExistingManufacturer.ManufacturerName" class="text-danger" id="manufacturerNameError"></span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputManufacturerBio" class="col-sm-2 col-form-label font-weight-bold" asp-for="ExistingManufacturer.ManufacturerBio"></label>
+        <div class="col-sm-10">
+            <textarea rows="3" class="form-control" id="inputManufacturerBio" value="@Model.ExistingManufacturer.ManufacturerBio" asp-for="ExistingManufacturer.ManufacturerBio"></textarea>
+            <span asp-validation-for="ExistingManufacturer.ManufacturerBio" class="text-danger" id="manufacturerBioError"></span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputManufacturerLogo" class="col-sm-2 col-form-label font-weight-bold" asp-for="ExistingManufacturer.ManufacturerLogo"></label>
+        <div class="col-sm-10">
+            <textarea type="text" class="form-control" id="inputManufacturerLogo" value="@Model.ExistingManufacturer.ManufacturerLogo" asp-for="ExistingManufacturer.ManufacturerLogo"></textarea>
+        </div>
+    </div>
+    <button type="submit" style="background-color: #FAC748;" class="btn" onclick="return validateInput()">Edit Manufacturer</button>
+</form>

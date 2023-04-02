@@ -1,35 +1,39 @@
 ﻿@page
-@model Tuple<AddProductModel, Manufacturers.IndexModel>
+@model System_Shopper.Pages.AddProductModel
 @{
     ViewData["Title"] = "Add Product";
 }
 
+
 <form method="post">
+    <div>
+        <h2>Add Product</h2>
+    </div>
     <div class="row mb-3">
         <label for="inputProductName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
         <div class="col-sm-10">
-            <input type="text" rows="3" class="form-control" id="inputProductName" asp-for="@Model.Item1.NewProduct.ProductName" />
+            <input type="text" rows="3" class="form-control" id="inputProductName" asp-for="@Model.NewProduct.ProductName" />
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputProductBio" class="col-sm-2 col-form-label"><b>Product Description:</b></label>
         <div class="col-sm-10">
-            <textarea rows="3" class="form-control" id="inputProductDescription" asp-for="@Model.Item1.NewProduct.ProductDescription"></textarea>
+            <textarea rows="3" class="form-control" id="inputProductDescription" asp-for="@Model.NewProduct.ProductDescription"></textarea>
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputPrice" class="col-sm-2 col-form-label"><b>Price:</b></label>
         <div class="col-sm-10">
-            <textarea type="text" class="form-control" id="inputPrice" asp-for="@Model.Item1.NewProduct.Price"></textarea>
+            <input type="text" placeholder="$0.00" class="form-control" id="inputPrice" asp-for="@Model.NewProduct.Price">
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputManufacturerId" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select class="form-control" id="inputManufacturerId" asp-for="@Model.Item1.NewProduct.ManufacturerId">
-                @foreach (var manufacturer in @Model.Item2.ManufacturerList)
+            <select class="form-control" id="inputManufacturerId" asp-for="@Model.NewProduct.ManufacturerId">
+                @foreach (var manufacturer in @Model.GetManufacturerList)
                 {
-                    <option value="manufacturer.ManufacturerId">Manufacturer.ManufacturerName</option>
+                    <option value="@manufacturer.ManufacturerId">@manufacturer.ManufacturerName</option>
                 }
             </select>
         </div>
@@ -37,7 +41,7 @@
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>
         <div class="col-sm-10">
-            <textarea type="text" class="form-control" id="inputProductImage" asp-for="@Model.Item1.NewProduct.ProductImage"></textarea>
+            <textarea type="text" class="form-control" id="inputProductImage" asp-for="@Model.NewProduct.ProductImage"></textarea>
         </div>
     </div>
     <button type="submit" style="background-color: #FAC748;" class="btn">Add Product</button>

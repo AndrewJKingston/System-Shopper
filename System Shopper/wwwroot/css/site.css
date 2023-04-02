@@ -21,3 +21,7 @@ body {
     color: #1D2F6F;
     border-color: #1D2F6F;
 }
+
+label {
+    font-weight: bold;
+}
