@@ -11,6 +11,9 @@ namespace System_Shopper.Pages
         public Product ExistingProduct { get; set; } = new Product();
 
         [BindProperty]
+        public Product NewProduct { get; set; } = new Product();
+
+        [BindProperty]
         public List<Manufacturer> GetManufacturerList { get; set; } = new List<Manufacturer>();
 
         public void OnGet(int id)
@@ -67,16 +70,17 @@ namespace System_Shopper.Pages
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     string sql = "UPDATE Product " +
-                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, Price = @price, DiscoundId = @discountId, ProductImage = @productImage" +
+                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
                         "WHERE ProductId = @productId;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@productName", ExistingProduct.ProductName);
-                    cmd.Parameters.AddWithValue("@productDescription", ExistingProduct.ProductDescription);
-                    cmd.Parameters.AddWithValue("@manufacturerId", ExistingProduct.ManufacturerId);
-                    cmd.Parameters.AddWithValue("@price", ExistingProduct.Price);
-                    cmd.Parameters.AddWithValue("@discountId", ExistingProduct.DiscountId);
-                    cmd.Parameters.AddWithValue("@productImage", ExistingProduct.ProductImage);
+                    cmd.Parameters.AddWithValue("@productName", NewProduct.ProductName);
+                    cmd.Parameters.AddWithValue("@productDescription", NewProduct.ProductDescription);
+                    cmd.Parameters.AddWithValue("@manufacturerId", NewProduct.ManufacturerId);
+                    cmd.Parameters.AddWithValue("@price", NewProduct.Price);
+                    cmd.Parameters.AddWithValue("@discountId", NewProduct.DiscountId);
+                    cmd.Parameters.AddWithValue("@productImage", NewProduct.ProductImage);
+                    cmd.Parameters.AddWithValue("@productId", NewProduct.ProductId);
                     conn.Open();
 
                     cmd.ExecuteNonQuery();
