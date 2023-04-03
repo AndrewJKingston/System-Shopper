@@ -71,15 +71,9 @@ namespace System_Shopper.Pages
                 // Step 1
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
-
-                    //string getManufacturerId = "SELECT ManufacturerId FROM Manufacturer WHERE ManufacturerName='@manufacturerName'";
-
                     // Step 2
-                    string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId) " +
-                        "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId)";
-
-                    //SqlCommand cmdOne = new SqlCommand(sql, conn);
-                    //cmdOne.Parameters.AddWithValue("@manufacturerName", NewProduct.ManufacturerId);
+                    string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId, DiscountId) " +
+                        "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId, @discountId)";
 
                     // Step 3
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -88,6 +82,7 @@ namespace System_Shopper.Pages
                     cmd.Parameters.AddWithValue("@price", NewProduct.Price);
                     cmd.Parameters.AddWithValue("@productImage", NewProduct.ProductImage);
                     cmd.Parameters.AddWithValue("@manufacturerId", NewProduct.ManufacturerId);
+                    cmd.Parameters.AddWithValue("@discountId", 1);
 
                     // Step 4
                     conn.Open();

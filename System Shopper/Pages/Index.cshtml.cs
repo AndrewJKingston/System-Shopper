@@ -50,7 +50,7 @@ namespace System_Shopper.Pages
                         product.ProductName = reader["ProductName"].ToString();
                         product.ProductDescription = reader["ProductDescription"].ToString();
                         product.ProductImage = reader["ProductImage"].ToString();
-                        product.Price = double.Parse(reader["Price"].ToString());
+                        product.Price = decimal.Parse(reader["Price"].ToString());
                         product.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         ProductList.Add(product);
 

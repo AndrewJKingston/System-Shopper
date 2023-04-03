@@ -19,10 +19,11 @@ namespace System_Shopper.Models
         public int ManufacturerId { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public int DiscountId { get; set; }
-
+        
+        [Required(ErrorMessage = "This field is required.")]
         [StringLength(300)]
         public string ProductImage { get; set; } = string.Empty;
     }

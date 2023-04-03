@@ -1,7 +1,6 @@
 ﻿@page
-@model System_Shopper.Pages.AddProductModel
+@model System_Shopper.Pages.EditProductModel
 @{
-    ViewData["Title"] = "Add Product";
 }
 
 <script type="text/javascript">
@@ -41,48 +40,48 @@
 
 <form method="post">
     <div>
-        <h2>Add Product</h2>
+        <h2>Edit Product</h2>
     </div>
     <div class="row mb-3">
         <label for="inputProductName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
         <div class="col-sm-10">
-            <input type="text" rows="3" class="form-control" id="inputProductName" asp-for="@Model.NewProduct.ProductName" />
-            <span asp-validation-for="NewProduct.ProductName" class="text-danger" id="productNameError"></span>
+            <input type="text" rows="3" class="form-control" id="inputProductName" asp-for="@Model.ExistingProduct.ProductName" />
+            <span asp-validation-for="ExistingProduct.ProductName" class="text-danger" id="productNameError"></span>
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputProductBio" class="col-sm-2 col-form-label"><b>Product Description:</b></label>
         <div class="col-sm-10">
-            <textarea rows="3" class="form-control" id="inputProductDescription" asp-for="@Model.NewProduct.ProductDescription"></textarea>
-            <span asp-validation-for="NewProduct.ProductDescription" class="text-danger" id="productDescriptionError"></span>
+            <textarea rows="3" class="form-control" id="inputProductDescription" asp-for="@Model.ExistingProduct.ProductDescription"></textarea>
+            <span asp-validation-for="ExistingProduct.ProductDescription" class="text-danger" id="productDescriptionError"></span>
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputPrice" class="col-sm-2 col-form-label"><b>Price:</b></label>
         <div class="col-sm-10">
-            <input type="text" placeholder="$0.00" class="form-control" id="inputPrice" asp-for="@Model.NewProduct.Price">
-            <span asp-validation-for="NewProduct.Price" class="text-danger" id="productPriceError"></span>
+            <input type="text" placeholder="$0.00" class="form-control" id="inputPrice" asp-for="@Model.ExistingProduct.Price">
+            <span asp-validation-for="ExistingProduct.Price" class="text-danger" id="productPriceError"></span>
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputManufacturerId" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select class="form-control" id="inputManufacturerId" asp-for="@Model.NewProduct.ManufacturerId">
-                <option value="" disabled selected hidden>Choose a manufacturer</option>
+            <select class="form-control" id="inputManufacturerId" asp-for="@Model.ExistingProduct.ManufacturerId">
+                <option value="@Model.ExistingProduct.ManufacturerId">Choose a manufacturer</option>
                 @foreach (var manufacturer in @Model.GetManufacturerList)
                 {
-                    <option value="@manufacturer.ManufacturerId">@manufacturer.ManufacturerName</option>
+                        <option value="@manufacturer.ManufacturerId">@manufacturer.ManufacturerName</option>
                 }
             </select>
-            <span asp-validation-for="NewProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
+            <span asp-validation-for="ExistingProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>
         <div class="col-sm-10">
-            <textarea type="text" class="form-control" id="inputProductImage" asp-for="@Model.NewProduct.ProductImage"></textarea>
-            <span asp-validation-for="NewProduct.ProductImage" class="text-danger" id="productImageError"></span>
+            <textarea type="text" class="form-control" id="inputProductImage" asp-for="@Model.ExistingProduct.ProductImage"></textarea>
+            <span asp-validation-for="ExistingProduct.ProductImage" class="text-danger" id="productImageError"></span>
         </div>
     </div>
-    <button type="submit" style="background-color: #FAC748;" class="btn" onclick="return validateInput()">Add Product</button>
+    <button type="submit" style="background-color: #FAC748;" class="btn" onclick="return validateInput()">Edit Product</button>
 </form>
