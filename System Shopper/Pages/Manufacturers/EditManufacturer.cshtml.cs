@@ -10,6 +10,9 @@ namespace System_Shopper.Pages.Manufacturers
         [BindProperty]
         public Manufacturer ExistingManufacturer { get; set; } = new Manufacturer();
 
+        [BindProperty]
+        public Manufacturer NewManufacturer { get; set; } = new Manufacturer();
+
         public void OnGet(int id)
         {
             if (ModelState.IsValid)
@@ -46,9 +49,9 @@ namespace System_Shopper.Pages.Manufacturers
                         "WHERE ManufacturerID = @manufacturerID;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@manufacturerName", ExistingManufacturer.ManufacturerName);
-                    cmd.Parameters.AddWithValue("@manufacturerBio", ExistingManufacturer.ManufacturerBio);
-                    cmd.Parameters.AddWithValue("@manufacturerLogo", ExistingManufacturer.ManufacturerLogo);
+                    cmd.Parameters.AddWithValue("@manufacturerName", NewManufacturer.ManufacturerName);
+                    cmd.Parameters.AddWithValue("@manufacturerBio", NewManufacturer.ManufacturerBio);
+                    cmd.Parameters.AddWithValue("@manufacturerLogo", NewManufacturer.ManufacturerLogo);
                     cmd.Parameters.AddWithValue("@manufacturerID", ExistingManufacturer.ManufacturerId);
                     conn.Open();
 

@@ -80,7 +80,7 @@
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>
         <div class="col-sm-10">
-            <textarea type="text" class="form-control" id="inputProductImage" asp-for="@Model.NewProduct.ProductImage"></textarea>
+            <input type="text" class="form-control" id="inputProductImage" asp-for="@Model.NewProduct.ProductImage">
             <span asp-validation-for="NewProduct.ProductImage" class="text-danger" id="productImageError"></span>
         </div>
     </div>
