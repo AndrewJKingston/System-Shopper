@@ -38,19 +38,27 @@
             </div>
             <!-- Spacer -->
             <div class="col-sm-2"></div>
-            <!-- Edit and Delete Buttons-->
-            <div style="border-left-style: solid; border-color: #8390FA; display: block; align-items: stretch;" class="col-sm-1">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a style="background-color: #FAC748;" asp-page="EditManufacturer" asp-route-id="@manufacturer.ManufacturerId" class="btn mb-3">Edit</a>
+            <form>
+                <!-- Edit and Delete Buttons-->
+                <div style="border-left-style: solid; border-color: #8390FA; display: block; align-items: stretch;" class="col-sm-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a style="background-color: #FAC748;" asp-page="EditManufacturer" asp-route-id="@manufacturer.ManufacturerId" class="btn mb-3">
+                                <i class="bi bi-pencil mx-2"></i>Edit
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!--<a asp-page="DeleteManufacturer" asp-route-id="@manufacturer.ManufacturerId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this manufacturer? This action cannot be undone.')">
+                                <i class="bi bi-x-circle mx-2"></i>Delete
+                            </a>-->
+                            <button type="submit" asp-route-id="@manufacturer.ManufacturerId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this manufacturer? This action cannot be undone.')">
+                                <i class="bi bi-x-circle mx-2"></i>Delete</button>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a asp-page="DeleteManufacturer" asp-route-id="@manufacturer.ManufacturerId" class="btn btn-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     }
 </div>
