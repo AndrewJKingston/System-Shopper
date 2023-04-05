@@ -7,9 +7,11 @@
     [DiscountID]         INT            NULL,
     [ProductImage]       VARCHAR (300)  NULL,
     CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([ProductID] ASC),
-    CONSTRAINT [FK_Product_Discount] FOREIGN KEY ([DiscountID]) REFERENCES [dbo].[Discount] ([DiscountID]),
-    CONSTRAINT [FK_Product_Manufacturer] FOREIGN KEY ([ManufacturerID]) REFERENCES [dbo].[Manufacturer] ([ManufacturerID])
+    CONSTRAINT [FK_Product_Discount] FOREIGN KEY ([DiscountID]) REFERENCES [dbo].[Discount] ([DiscountID]) ON DELETE SET NULL,
+    CONSTRAINT [FK_Product_Manufacturer] FOREIGN KEY ([ManufacturerID]) REFERENCES [dbo].[Manufacturer] ([ManufacturerID]) ON DELETE CASCADE
 );
+
+
 
 
 
