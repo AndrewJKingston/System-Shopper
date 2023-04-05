@@ -43,6 +43,7 @@
     <div>
         <h2>Add Product</h2>
     </div>
+    <!-- Product Name -->
     <div class="row mb-3">
         <label for="inputProductName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
         <div class="col-sm-10">
@@ -50,6 +51,7 @@
             <span asp-validation-for="NewProduct.ProductName" class="text-danger" id="productNameError"></span>
         </div>
     </div>
+    <!-- Product Bio -->
     <div class="row mb-3">
         <label for="inputProductBio" class="col-sm-2 col-form-label"><b>Product Description:</b></label>
         <div class="col-sm-10">
@@ -57,6 +59,7 @@
             <span asp-validation-for="NewProduct.ProductDescription" class="text-danger" id="productDescriptionError"></span>
         </div>
     </div>
+    <!-- Product Price -->
     <div class="row mb-3">
         <label for="inputPrice" class="col-sm-2 col-form-label"><b>Price:</b></label>
         <div class="col-sm-10">
@@ -64,7 +67,8 @@
             <span asp-validation-for="NewProduct.Price" class="text-danger" id="productPriceError"></span>
         </div>
     </div>
-    <div class="row mb-3">
+    <!-- Product Manufacturer -->
+    @*<div class="row mb-3">
         <label for="inputManufacturerId" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
             <select class="form-control" id="inputManufacturerId" asp-for="@Model.NewProduct.ManufacturerId">
@@ -76,7 +80,15 @@
             </select>
             <span asp-validation-for="NewProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
         </div>
+    </div>*@
+    <!-- Product Manufacturer TEST -->
+    <div class="row mb-3">
+        <label for="ddlManufacturers" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
+        <div class="col-sm-10">
+            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
+        </div>        
     </div>
+    <!-- Product Logo -->
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>
         <div class="col-sm-10">
