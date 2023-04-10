@@ -43,6 +43,7 @@
     <div>
         <h2>Edit Product</h2>
     </div>
+    <!-- Product Name -->
     <div class="row mb-3">
         <label for="inputProductName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
         <div class="col-sm-10">
@@ -50,6 +51,7 @@
             <span asp-validation-for="ExistingProduct.ProductName" class="text-danger" id="productNameError"></span>
         </div>
     </div>
+    <!-- Product Bio -->
     <div class="row mb-3">
         <label for="inputProductDescription" class="col-sm-2 col-form-label"><b>Product Description:</b></label>
         <div class="col-sm-10">
@@ -57,6 +59,7 @@
             <span asp-validation-for="ExistingProduct.ProductDescription" class="text-danger" id="productDescriptionError"></span>
         </div>
     </div>
+    <!-- Product Price -->
     <div class="row mb-3">
         <label for="inputPrice" class="col-sm-2 col-form-label"><b>Price:</b></label>
         <div class="col-sm-10">
@@ -64,19 +67,23 @@
             <span asp-validation-for="ExistingProduct.Price" class="text-danger" id="productPriceError"></span>
         </div>
     </div>
+    <!-- Product Manufacturer -->
     <div class="row mb-3">
-        <label for="inputManufacturerId" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
+        <label for="ddlManufacturers" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select class="form-control" id="inputManufacturerId" value="@Model.ExistingProduct.ManufacturerId" asp-for="@Model.NewProduct.ManufacturerId">
-                <option value="@Model.ExistingProduct.ManufacturerId">Choose a manufacturer</option>
-                @foreach (var manufacturer in @Model.GetManufacturerList)
-                {
-                        <option value="@manufacturer.ManufacturerId">@manufacturer.ManufacturerName</option>
-                }
-            </select>
-            <span asp-validation-for="ExistingProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
+            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
+        </div>
+        <span asp-validation-for="ExistingProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
         </div>
     </div>
+    <!-- Product Discount -->
+    <div class="row mb-3">
+        <label for="ddlDiscounts" class="col-sm-2 col-form-label"><b>Discount:</b></label>
+        <div class="col-sm-10">
+            <select class="rounded" id="ddlDiscounts" asp-for="NewProduct.DiscountId" asp-items="@Model.Discounts"></select>
+        </div>
+    </div>
+    <!-- Product Image -->
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>
         <div class="col-sm-10">
