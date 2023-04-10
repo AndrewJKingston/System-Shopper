@@ -1,0 +1,18 @@
+System Builder
+
+Layout
+	Navigation header
+
+Page
+	Title
+	Filters (Form)
+	Categories (Form)
+	Products (Center-List)
+		Add to System (Button)
+	System Parts (Right-List)
+		Cost (Dynamic label-script)
+
+Code
+	(OnGet) List of products
+	(OnPost) Filter SQL
+	(OnPost) Add to list by ID
