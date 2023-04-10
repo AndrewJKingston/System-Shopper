@@ -4,7 +4,7 @@ Layout
 	Navigation header
 
 Page
-	Title
+	X Title 
 	Filters (Form)
 	Categories (Form)
 	Products (Center-List)

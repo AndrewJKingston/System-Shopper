@@ -7,6 +7,7 @@ namespace System_Shopper.Pages
 {
     public class IndexModel : PageModel
     {
+        [BindProperty]
         public List<Product> ProductList { get; set; } = new List<Product>();
 
         private readonly ILogger<IndexModel> _logger;
@@ -49,11 +50,11 @@ namespace System_Shopper.Pages
                         product.ProductId = int.Parse(reader["ProductId"].ToString());
                         product.ProductName = reader["ProductName"].ToString();
                         product.ProductDescription = reader["ProductDescription"].ToString();
-                        product.ProductImage = reader["ProductImage"].ToString();
+                        product.ManufacturerId = int.Parse(reader["ManufacturerId"].ToString());
                         product.Price = decimal.Parse(reader["Price"].ToString());
                         product.DiscountId = int.Parse(reader["DiscountId"].ToString());
+                        product.ProductImage = reader["ProductImage"].ToString();
                         ProductList.Add(product);
-
                     }
                 }
             }
