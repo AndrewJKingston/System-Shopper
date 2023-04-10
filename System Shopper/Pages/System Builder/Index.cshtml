@@ -4,6 +4,40 @@
     ViewData["Title"] = "System Builder";
 }
 
+<script type="text/javascript">
+
+    const SystemListOut = [
+        {
+            right: 0,
+        },
+        {
+            right: -80px;
+        },
+    ];
+
+    const SystemListIn = [
+        {
+            right: -80px;
+        },
+        {
+            right: 0,
+        },
+    ];
+
+    const SystemList = document.getElementById("SystemList");
+    const ListButton = document.getElementById("ListTrigger");
+
+    ListButton.addEventListener("click", () => {
+        if (SystemList.style.right == 0) {
+            console.log("reached if");
+            SystemList.animate(SystemListOut, 100);
+        } else {
+            console.log("reached else");
+            SystemList.animate(SystemListIn, 100);
+        }
+    });
+</script>
+
 <div class="container">
     <!-- Title -->
     <div class="row">
@@ -19,7 +53,9 @@
             <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Z-A</a>
             <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Price</a>
         </div>
-    </div>
+        <div style="background-color: #8390FA" class="col-sm-4 mt-3">
+            <div id="ListTrigger">System Items</div>
+        </div>
     <div class="row">
         <!-- Categories -->
         <div class="col-sm-2 mt-2">
@@ -56,8 +92,8 @@
             }
         </div>
         <!-- System List -->
-        <div class="col-sm-3">
-
+        <div id="SystemList" style="background-color: #8390FA" class="col-sm-3">
+            Things
         </div>
     </div>
 </div>
