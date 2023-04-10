@@ -9,13 +9,11 @@ html {
 }
 
 html {
-    height: 100%;
     position: relative;
     min-height: 100%;
 }
 
 body {
-    height: 100%;
     margin-bottom: 60px;
 }
 
