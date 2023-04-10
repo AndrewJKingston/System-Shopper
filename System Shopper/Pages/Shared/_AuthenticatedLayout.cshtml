@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - System_Shopper</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/System_Shopper.styles.css" asp-append-version="true" />
@@ -13,26 +13,18 @@
     <header>
         <nav style="background-color:#8390FA;" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container">
-                <a style="text-decoration: none" class="h2" asp-area="" asp-page="/Index"><i class="bi bi-motherboard"></i> <b>System_Shopper</b></a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><i class="bi bi-motherboard"></i> <b>System_Shopper</b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav mx-3 flex-grow-1">
-                        <!--
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Index"><i class="bi bi-house"></i> <b>Home</b></a>
                         </li>
-                        -->
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/System Builder/Index"><i class="bi bi-bricks"></i> <b>System Builder</b></a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Manufacturers/Index"><i class="bi bi-building"></i> <b>Manufacturers</b></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Discounts/DiscountIndex"><b> Discounts</b> </a>
                         </li>
                         <!--<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
@@ -43,10 +35,8 @@
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div>
+        @RenderBody()
     </div>
 
     <footer style="background-color: #8390FA; position: absolute; bottom: 0; width: 100%; height: 2.5rem;" class="border-top footer text-muted">
