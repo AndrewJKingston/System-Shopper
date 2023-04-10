@@ -88,6 +88,13 @@
             <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
         </div>        
     </div>
+    <!-- Product Discount -->
+    <div class="row mb-3">
+        <label for="ddlDiscounts" class="col-sm-2 col-form-label"><b>Discount:</b></label>
+        <div class="col-sm-10">
+            <select class="rounded" id="ddlDiscounts" asp-for="NewProduct.DiscountId" asp-items="@Model.Discounts"></select>
+        </div>
+    </div>
     <!-- Product Logo -->
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>

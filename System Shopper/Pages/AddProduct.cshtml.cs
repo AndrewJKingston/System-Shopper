@@ -19,9 +19,13 @@ namespace System_Shopper.Pages
         [BindProperty]
         public List<SelectListItem> Manufacturers { get; set; } = new List<SelectListItem>();
 
+        [BindProperty]
+        public List<SelectListItem> Discounts { get; set; } = new List<SelectListItem>();
+
         public void OnGet()
         {
             PopulateManufacturers();
+            PopulateDiscounts();
         }
 
         private void PopulateManufacturers()
@@ -41,6 +45,28 @@ namespace System_Shopper.Pages
                         manufacturer.Value = reader["ManufacturerId"].ToString();
                         manufacturer.Text = reader["ManufacturerName"].ToString();
                         Manufacturers.Add(manufacturer);
+                    }
+                }
+            }
+        }
+
+        private void PopulateDiscounts()
+        {
+            using (SqlConnection conn = new SqlConnection( DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT * FROM Discount ORDER BY DiscountPercent";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SelectListItem discount = new SelectListItem();
+                        discount.Value = reader["DiscountId"].ToString();
+                        discount.Text = reader["DiscountName"].ToString() + ": " + reader["DiscountPercent"].ToString();
+                        Discounts.Add(discount);
                     }
                 }
             }
