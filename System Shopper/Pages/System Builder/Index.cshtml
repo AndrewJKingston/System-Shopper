@@ -86,7 +86,16 @@
                         <!-- Product Information -->
                         <div class="col-sm-7">
                             <!-- Product Name -->
-                            <h6>@product.ProductName</h6>
+                            <div class="row">
+                                <h6>@product.ProductName</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <a style="background-color: #FAC748;" asp-page="" asp-route-id="@product.ProductId" class="btn mb-3">
+                                        <i class="bi bi-plus mx-1"></i> Add To System
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
