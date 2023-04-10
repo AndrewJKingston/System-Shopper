@@ -9,25 +9,29 @@
 
   <ItemGroup>
     <Compile Remove="Pages\NewFolder1\**" />
-    <Compile Remove="Pages\NewFolder\**" />
     <Content Remove="Pages\NewFolder1\**" />
-    <Content Remove="Pages\NewFolder\**" />
     <EmbeddedResource Remove="Pages\NewFolder1\**" />
-    <EmbeddedResource Remove="Pages\NewFolder\**" />
     <None Remove="Pages\NewFolder1\**" />
-    <None Remove="Pages\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Index1.cshtml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\Index1.cshtml" />
+    <Content Remove="Pages\Shared\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Shared\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Shared\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Shared\Index.cshtml" />
   </ItemGroup>
 
 </Project>
