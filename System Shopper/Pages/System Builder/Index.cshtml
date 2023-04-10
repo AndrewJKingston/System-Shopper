@@ -15,9 +15,9 @@
     <div class="row">
         <div class="col-sm-8">
             <h4>Filters:</h4>
-            <a class="pr-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Name A-Z</a>
-            <a class="pr-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Name Z-A</a>
-            <a class="pr-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Price</a>
+            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">A-Z</a>
+            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Z-A</a>
+            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Price</a>
         </div>
     </div>
     <div class="row">
@@ -35,30 +35,25 @@
             </ul>
         </div>
         <!-- Products -->
-        <div class="col-sm-8 mt-2">
+        <div class="col-sm-10 mt-2">
             @foreach (var product in Model.ProductList)
             {
                 <!--Product List-->
-                <div style="border-style: solid; border-color: #1D2F6F" class="row mb-3 p-2 rounded">
-                    <div class="col-sm-3">
-                        <img style="width: 150;" class="img-fluid" src="@product.ProductImage" alt="Product Image" /> <!-- Manufacturer image goes here -->
-                        <h3>$<b>@product.Price</b></h3>
-                    </div>
-                    <!-- Product Information -->
-                    <div class="col-sm-8">
-                        <!-- Product Name and Price-->
-                        <div class="row">
-                            <div class="col-sm-9">
-                                <h5>@product.ProductName</h5>
-                            </div>
-                            <!--<div class="col-sm-3">
-                                <h3>$<b>product.Price</b></h3>
-                            </div>-->
+                <div style="border-style: solid; border-color: #1D2F6F; display: inline-block" class="col-5 mb-3 p-2 rounded">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <!-- Product Image and Price-->
+                            <img style="width: 150px;" class="img-fluid" src="@product.ProductImage" alt="Product Image" /> 
+                            <h3>$<b>@product.Price</b></h3>
+                        </div>
+                        <!-- Product Information -->
+                        <div class="col-sm-7">
+                            <!-- Product Name -->
+                            <h6>@product.ProductName</h6>
                         </div>
                     </div>
                 </div>
             }
-
         </div>
         <!-- System List -->
         <div class="col-sm-3">
