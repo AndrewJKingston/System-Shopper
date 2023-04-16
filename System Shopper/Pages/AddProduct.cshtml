@@ -71,7 +71,9 @@
     <div class="row mb-3">
         <label for="ddlManufacturers" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
+            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers">
+                <option value="" disabled selected>Select a Manufacturer</option>
+            </select>
         </div>        
     </div>
     <!-- Product Discount -->

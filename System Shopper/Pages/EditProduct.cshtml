@@ -71,16 +71,17 @@
     <div class="row mb-3">
         <label for="ddlManufacturers" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
+            <select class="rounded" id="ddlManufacturers" selected="@Model.ExistingProduct.ManufacturerId" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
         </div>
         <span asp-validation-for="ExistingProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
         </div>
-    </div>
     <!-- Product Discount -->
     <div class="row mb-3">
         <label for="ddlDiscounts" class="col-sm-2 col-form-label"><b>Discount:</b></label>
         <div class="col-sm-10">
-            <select class="rounded" id="ddlDiscounts" asp-for="NewProduct.DiscountId" asp-items="@Model.Discounts"></select>
+            <select class="rounded" id="ddlDiscounts" selected="@Model.ExistingProduct.DiscountId" asp-for="NewProduct.DiscountId" asp-items="@Model.Discounts">
+                <option value="" disabled selected>Select a Discount</option>
+            </select>
         </div>
     </div>
     <!-- Product Image -->

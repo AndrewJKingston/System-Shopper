@@ -20,10 +20,37 @@ namespace System_Shopper.Pages
         [BindProperty]
         public List<SelectListItem> Discounts { get; set; } = new List<SelectListItem>();
 
-        public void OnGet()
+        public void OnGet(int id)
         {
+            ExistingProduct.ProductId = id;
+            PopulateExistingProduct();
             PopulateManufacturers();
             PopulateDiscounts();
+        }
+
+        private void PopulateExistingProduct()
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT * FROM Product WHERE ProductId=@productId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@productId", ExistingProduct.ProductId);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ExistingProduct.ProductName = reader["ProductName"].ToString();
+                        ExistingProduct.ProductDescription = reader["ProductDescription"].ToString();
+                        ExistingProduct.ManufacturerId = int.Parse(reader["ManufacturerId"].ToString());
+                        ExistingProduct.Price = decimal.Parse(reader["Price"].ToString());
+                        ExistingProduct.DiscountId = int.Parse(reader["DiscountId"].ToString());
+                        ExistingProduct.ProductImage = reader["ProductImage"].ToString();
+                    }
+                }
+            }
         }
 
         private void PopulateManufacturers()
