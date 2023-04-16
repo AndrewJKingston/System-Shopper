@@ -14,9 +14,6 @@ namespace System_Shopper.Pages
         public Product NewProduct { get; set; } = new Product();
 
         [BindProperty]
-        public List<Manufacturer> GetManufacturerList { get; set; } = new List<Manufacturer>();
-
-        [BindProperty]
         public List<SelectListItem> Manufacturers { get; set; } = new List<SelectListItem>();
 
         [BindProperty]
@@ -99,7 +96,7 @@ namespace System_Shopper.Pages
                     cmd.Parameters.AddWithValue("@price", NewProduct.Price);
                     cmd.Parameters.AddWithValue("@productImage", NewProduct.ProductImage);
                     cmd.Parameters.AddWithValue("@manufacturerId", NewProduct.ManufacturerId);
-                    cmd.Parameters.AddWithValue("@discountId", 1);
+                    cmd.Parameters.AddWithValue("@discountId", NewProduct.DiscountId);
 
                     // Step 4
                     conn.Open();

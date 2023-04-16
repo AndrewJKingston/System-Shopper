@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using System_Shopper.Models;
 
@@ -14,51 +15,84 @@ namespace System_Shopper.Pages
         public Product NewProduct { get; set; } = new Product();
 
         [BindProperty]
-        public List<Manufacturer> GetManufacturerList { get; set; } = new List<Manufacturer>();
+        public List<SelectListItem> Manufacturers { get; set; } = new List<SelectListItem>();
+
+        [BindProperty]
+        public List<SelectListItem> Discounts { get; set; } = new List<SelectListItem>();
 
         public void OnGet(int id)
         {
-            if (ModelState.IsValid)
+            ExistingProduct.ProductId = id;
+            PopulateExistingProduct();
+            PopulateManufacturers();
+            PopulateDiscounts();
+        }
+
+        private void PopulateExistingProduct()
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+                string sql = "SELECT * FROM Product WHERE ProductId=@productId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@productId", ExistingProduct.ProductId);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    string sql = "SELECT * FROM Product WHERE ProductId = @productId";
-
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    cmd.Parameters.AddWithValue("@productId", id);
-                    conn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.HasRows)
+                    while (reader.Read())
                     {
-                        reader.Read();
                         ExistingProduct.ProductName = reader["ProductName"].ToString();
                         ExistingProduct.ProductDescription = reader["ProductDescription"].ToString();
-                        ExistingProduct.ManufacturerId = (int)reader["ManufacturerId"];
-                        ExistingProduct.Price = (decimal)reader["Price"];
-                        ExistingProduct.DiscountId = (int)reader["DiscountId"];
+                        ExistingProduct.ManufacturerId = int.Parse(reader["ManufacturerId"].ToString());
+                        ExistingProduct.Price = decimal.Parse(reader["Price"].ToString());
+                        ExistingProduct.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         ExistingProduct.ProductImage = reader["ProductImage"].ToString();
                     }
-                    reader.Close();
-                    string sqlManufacturer = "SELECT * FROM Manufacturer ORDER BY ManufacturerName";
+                }
+            }
+        }
 
-                    SqlCommand cmdManufacturer = new SqlCommand(sqlManufacturer, conn);
+        private void PopulateManufacturers()
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT * FROM Manufacturer ORDER BY ManufacturerName";
+                SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    SqlDataReader readerTwo = cmdManufacturer.ExecuteReader();
-                    if (readerTwo.HasRows)
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
                     {
-                        while (readerTwo.Read())
-                        {
-                            Manufacturer manufacturer = new Manufacturer();
-                            manufacturer.ManufacturerName = readerTwo["ManufacturerName"].ToString();
-                            manufacturer.ManufacturerBio = readerTwo["ManufacturerBio"].ToString();
-                            manufacturer.ManufacturerId = int.Parse(readerTwo["ManufacturerId"].ToString());
-                            manufacturer.ManufacturerLogo = readerTwo["ManufacturerLogo"].ToString();
-                            GetManufacturerList.Add(manufacturer);
-                        }
+                        SelectListItem manufacturer = new SelectListItem();
+                        manufacturer.Value = reader["ManufacturerId"].ToString();
+                        manufacturer.Text = reader["ManufacturerName"].ToString();
+                        Manufacturers.Add(manufacturer);
                     }
-                    readerTwo.Close();
+                }
+            }
+        }
+
+        private void PopulateDiscounts()
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT * FROM Discount ORDER BY DiscountPercent";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SelectListItem discount = new SelectListItem();
+                        discount.Value = reader["DiscountId"].ToString();
+                        discount.Text = reader["DiscountName"].ToString() + ": " + reader["DiscountPercent"].ToString();
+                        Discounts.Add(discount);
+                    }
                 }
             }
         }

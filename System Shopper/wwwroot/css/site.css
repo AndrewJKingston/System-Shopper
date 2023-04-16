@@ -26,14 +26,14 @@ label {
     font-weight: bold;
 }
 
-#SystemList {
+#SystemListLabel {
     position: fixed;
-    top: 20px;
-    right: -80px;
-    width: 80px;
-    height: 300px;
+    top: 100px;
+    right: 0px;
+    width: 100px;
+    height: 30px;
 }
 
-#ListTrigger {
+#ListTrigger:hover {
     cursor: pointer;
 }

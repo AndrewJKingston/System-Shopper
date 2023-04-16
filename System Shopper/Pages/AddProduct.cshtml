@@ -68,24 +68,12 @@
         </div>
     </div>
     <!-- Product Manufacturer -->
-    @*<div class="row mb-3">
-        <label for="inputManufacturerId" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
-        <div class="col-sm-10">
-            <select class="form-control" id="inputManufacturerId" asp-for="@Model.NewProduct.ManufacturerId">
-                <option value="" disabled selected hidden>Choose a manufacturer</option>
-                @foreach (var manufacturer in @Model.GetManufacturerList)
-                {
-                    <option value="@manufacturer.ManufacturerId">@manufacturer.ManufacturerName</option>
-                }
-            </select>
-            <span asp-validation-for="NewProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
-        </div>
-    </div>*@
-    <!-- Product Manufacturer TEST -->
     <div class="row mb-3">
         <label for="ddlManufacturers" class="col-sm-2 col-form-label"><b>Manufacturer:</b></label>
         <div class="col-sm-10">
-            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
+            <select class="rounded" id="ddlManufacturers" asp-for="NewProduct.ManufacturerId" asp-items="@Model.Manufacturers">
+                <option value="" disabled selected>Select a Manufacturer</option>
+            </select>
         </div>        
     </div>
     <!-- Product Discount -->
@@ -95,7 +83,7 @@
             <select class="rounded" id="ddlDiscounts" asp-for="NewProduct.DiscountId" asp-items="@Model.Discounts"></select>
         </div>
     </div>
-    <!-- Product Logo -->
+    <!-- Product Image -->
     <div class="row mb-3">
         <label for="inputProductLogo" class="col-sm-2 col-form-label"><b>Product Image:</b></label>
         <div class="col-sm-10">
