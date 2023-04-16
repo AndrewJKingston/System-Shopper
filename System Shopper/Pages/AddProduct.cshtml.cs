@@ -17,6 +17,9 @@ namespace System_Shopper.Pages
         public List<SelectListItem> Manufacturers { get; set; } = new List<SelectListItem>();
 
         [BindProperty]
+        public List<SelectListItem> ProductTypes { get; set; } = new List<SelectListItem>();
+
+        [BindProperty]
         public List<SelectListItem> Discounts { get; set; } = new List<SelectListItem>();
 
         public void OnGet()
@@ -46,7 +49,27 @@ namespace System_Shopper.Pages
                 }
             }
         }
+        private void PopulateProductTypes()
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT * FROM ProductType ORDER BY ProductType";
+                SqlCommand cmd = new SqlCommand(sql, conn);
 
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SelectListItem productType = new SelectListItem();
+                        productType.Value = reader["ProductTypeId"].ToString();
+                        productType.Text = reader["ProductType"].ToString();
+                        ProductTypes.Add(productType);
+                    }
+                }
+            }
+        }
         private void PopulateDiscounts()
         {
             using (SqlConnection conn = new SqlConnection( DBHelper.GetConnectionString()))

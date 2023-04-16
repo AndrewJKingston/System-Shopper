@@ -26,5 +26,7 @@ namespace System_Shopper.Models
         [Required(ErrorMessage = "This field is required.")]
         [StringLength(300)]
         public string ProductImage { get; set; } = string.Empty;
+
+        public string ProductType { get; set; } = string.Empty;
     }
 }
