@@ -27,6 +27,6 @@ namespace System_Shopper.Models
         [StringLength(300)]
         public string ProductImage { get; set; } = string.Empty;
 
-        public string ProductType { get; set; } = string.Empty;
+        public int ProductType { get; set; }
     }
 }

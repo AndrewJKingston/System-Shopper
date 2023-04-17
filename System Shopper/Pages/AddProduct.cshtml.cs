@@ -26,6 +26,7 @@ namespace System_Shopper.Pages
         {
             PopulateManufacturers();
             PopulateDiscounts();
+            PopulateProductTypes();
         }
 
         private void PopulateManufacturers()
@@ -49,6 +50,7 @@ namespace System_Shopper.Pages
                 }
             }
         }
+
         private void PopulateProductTypes()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
@@ -70,6 +72,7 @@ namespace System_Shopper.Pages
                 }
             }
         }
+
         private void PopulateDiscounts()
         {
             using (SqlConnection conn = new SqlConnection( DBHelper.GetConnectionString()))
@@ -109,8 +112,8 @@ namespace System_Shopper.Pages
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     // Step 2
-                    string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId, DiscountId) " +
-                        "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId, @discountId)";
+                    string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId, DiscountId, ProductType) " +
+                        "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId, @discountId. @productType)";
 
                     // Step 3
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -120,6 +123,7 @@ namespace System_Shopper.Pages
                     cmd.Parameters.AddWithValue("@productImage", NewProduct.ProductImage);
                     cmd.Parameters.AddWithValue("@manufacturerId", NewProduct.ManufacturerId);
                     cmd.Parameters.AddWithValue("@discountId", NewProduct.DiscountId);
+                    cmd.Parameters.AddWithValue("@productType", NewProduct.ProductType);
 
                     // Step 4
                     conn.Open();

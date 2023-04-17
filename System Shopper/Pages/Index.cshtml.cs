@@ -54,6 +54,7 @@ namespace System_Shopper.Pages
                         product.Price = decimal.Parse(reader["Price"].ToString());
                         product.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         product.ProductImage = reader["ProductImage"].ToString();
+                        //product.ProductType = int.Parse(reader["ProductTypeId"].ToString());
                         ProductList.Add(product);
                     }
                 }
