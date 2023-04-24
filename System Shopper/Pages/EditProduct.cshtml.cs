@@ -12,9 +12,6 @@ namespace System_Shopper.Pages
         public Product ExistingProduct { get; set; } = new Product();
 
         [BindProperty]
-        public Product NewProduct { get; set; } = new Product();
-
-        [BindProperty]
         public List<SelectListItem> Manufacturers { get; set; } = new List<SelectListItem>();
 
         [BindProperty]
@@ -108,13 +105,13 @@ namespace System_Shopper.Pages
                         "WHERE ProductId = @productId;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@productName", NewProduct.ProductName);
-                    cmd.Parameters.AddWithValue("@productDescription", NewProduct.ProductDescription);
-                    cmd.Parameters.AddWithValue("@manufacturerId", NewProduct.ManufacturerId);
-                    cmd.Parameters.AddWithValue("@price", NewProduct.Price);
-                    cmd.Parameters.AddWithValue("@discountId", NewProduct.DiscountId);
-                    cmd.Parameters.AddWithValue("@productImage", NewProduct.ProductImage);
-                    cmd.Parameters.AddWithValue("@productId", NewProduct.ProductId);
+                    cmd.Parameters.AddWithValue("@productName", ExistingProduct.ProductName);
+                    cmd.Parameters.AddWithValue("@productDescription", ExistingProduct.ProductDescription);
+                    cmd.Parameters.AddWithValue("@manufacturerId", ExistingProduct.ManufacturerId);
+                    cmd.Parameters.AddWithValue("@price", ExistingProduct.Price);
+                    cmd.Parameters.AddWithValue("@discountId", ExistingProduct.DiscountId);
+                    cmd.Parameters.AddWithValue("@productImage", ExistingProduct.ProductImage);
+                    cmd.Parameters.AddWithValue("@productId", ExistingProduct.ProductId);
                     conn.Open();
 
                     cmd.ExecuteNonQuery();

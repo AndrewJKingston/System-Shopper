@@ -8,9 +8,18 @@ namespace System_Shopper.Pages.System_Builder
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public List<Product> ProductList { get; set; } = new List<Product>();
+        public List<Product> Products { get; set; } = new List<Product>();
 
-        public void OnGet()
+        [BindProperty]
+        public List<ProductList> ProductList { get; set; } = new List<ProductList>();
+
+        public void OnGet(int id)
+        {
+            PopulateProducts();
+            PopulateProductList(id);
+        }
+
+        public void PopulateProducts()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
@@ -32,10 +41,40 @@ namespace System_Shopper.Pages.System_Builder
                         product.Price = decimal.Parse(reader["Price"].ToString());
                         product.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         product.ProductImage = reader["ProductImage"].ToString();
-                        ProductList.Add(product);
+                        Products.Add(product);
                     }
                 }
             }
+        }
+
+        public void PopulateProductList(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT * FROM ProductList WHERE SystemListID = @systemListId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@systemListId", id);
+
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ProductList productList = new ProductList();
+                        productList.SystemListID = int.Parse(reader["SystemListID"].ToString());
+                        productList.ProductID = int.Parse(reader["ProductID"].ToString());
+                        ProductList.Add(productList);
+                    }
+                }
+            }
+        }
+
+        public void OnPost(int id)
+        {
+
         }
     }
 }
