@@ -59,33 +59,32 @@
     </div>
     <div class="row">
         <!-- Categories -->
-        <div class="col-sm-2 mt-2">
-
+        <form method="post">
+            <div class="col-sm-2 mt-2">
                 <input type="radio" id="filterCase" value="Case" />
                 <label for="filterCase">Computer Cases</label>
 
-                <input type="radio" id="filterCase" value="Case" />
-                <label for="filterCase">Computer Cases</label>
                 <input type="radio" id="filterCPU" value="CPU" />
                 <label for="filterCPU">CPUs</label>
 
                 <input type="radio" id="filterCooler" value="Coolers" />
                 <label for="filterCooler">CPU Coolers</label>
 
-            <ul>
-                <li>Cases</li>
-                <li>CPUs</li>
-                <li>Coolers</li>
-                <li>Graphics Cards</li>
-                <li>Motherboards</li>
-                <li>RAM</li>
-                <li>Storage</li>
-                <li>Power Supplies</li>
-            </ul>
-        </div>
+                <!--<ul>
+                    <li>Cases</li>
+                    <li>CPUs</li>
+                    <li>Coolers</li>
+                    <li>Graphics Cards</li>
+                    <li>Motherboards</li>
+                    <li>RAM</li>
+                    <li>Storage</li>
+                    <li>Power Supplies</li>
+                </ul>-->
+            </div>
+        </form>
         <!-- Products -->
         <div class="col-sm-10 mt-2">
-            @foreach (var product in Model.ProductList)
+            @foreach (var product in Model.Products)
             {
                 <!--Product List-->
                 <div style="border-style: solid; border-color: #1D2F6F; display: inline-block" class="col-5 mb-3 p-2 rounded">

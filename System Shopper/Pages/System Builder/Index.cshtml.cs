@@ -11,7 +11,12 @@ namespace System_Shopper.Pages.System_Builder
         public List<Product> Products { get; set; } = new List<Product>();
 
         [BindProperty]
+        String filterText { get; set; }
+        [BindProperty]
         public List<ProductList> ProductList { get; set; } = new List<ProductList>();
+
+        [BindProperty]
+        public List<Product> SystemList { get; set; } = new List<Product>();
 
         public void OnGet(int id)
         {
