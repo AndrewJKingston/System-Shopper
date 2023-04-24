@@ -1,0 +1,15 @@
+﻿@page
+@model System_Shopper.Pages.ProductTypes.ProductTypeIndex
+@{
+    ViewData["Title"] = "Product Types";
+}
+<h2>@ViewData["Title"]</h2>
+
+<p>Welcome to the Product Types page!</p>
+<form method="post">
+    <div class="form-group">
+        <label for="ProductTypeName">Product Type:</label>
+        <input type="text" id="ProductTypeName" name="ProductTypeName" class="form-control" asp-for="@Model.NewProductType.ProductTypeName" />
+    </div>
+    <button type="submit" style="background-color: #FAC748;" class="btn mt-2">Add Product Type</button>
+</form>
