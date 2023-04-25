@@ -20,7 +20,7 @@ namespace System_Shopper.Pages.ProductTypes
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
                 // Step 2
-                string sql = "SELECT ProductType FROM ProductType";
+                string sql = "SELECT * FROM ProductType ORDER BY ProductType";
 
                 // Step 3
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -51,7 +51,7 @@ namespace System_Shopper.Pages.ProductTypes
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     // Step 2
-                    string sql = "INSERT INTO ProductType(ProductType)" + "VALUES(@ProductType)";
+                    string sql = "INSERT INTO ProductType(ProductType) VALUES(@ProductType)";
 
                     // Step 3
                     SqlCommand cmd = new SqlCommand(sql, conn);
