@@ -106,11 +106,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-9">
-                                    <form method="post">
-                                        <button type="submit" style="background-color: #FAC748;" asp-route-id="@product.ProductId" class="btn mb-3">
-                                            <i class="bi bi-plus mx-1"></i> Add To System
-                                        </button>
-                                    </form>
+                                    <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/AddProductToList" asp-route-id="@product.ProductId" class="btn mb-3">
+                                        <i class="bi bi-plus mx-1"></i> Add To System
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -123,9 +121,9 @@
             <h5>Your System: </h5>
         </div>
         <div id="SystemList" class="pt-1">
-            @foreach (var product in Model.SystemList)
+            @foreach (var product in Model.ProductsInList)
             {
-                @product.ProductName
+                <h5>@product.ProductName</h5>
             }
         </div>
     </div>

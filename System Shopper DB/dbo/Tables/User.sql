@@ -10,8 +10,10 @@
     [LastLoginTime]  DATETIME      NULL,
     [CartID]         INT           NULL,
     CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([UserID] ASC),
-    CONSTRAINT [FK_User_Cart] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Cart] ([CartID])
+    CONSTRAINT [FK_User_Cart] FOREIGN KEY ([CartID]) REFERENCES [dbo].[Cart] ([CartID])
 );
+
+
 
 
 

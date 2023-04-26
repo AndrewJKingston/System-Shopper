@@ -1,4 +1,6 @@
-﻿namespace System_Shopper.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace System_Shopper.Models
 {
     public class ProductList
     {

@@ -26,8 +26,9 @@ namespace System_Shopper.Pages
             _logger = logger;
         }
 
-        public void OnGet(int sessionID)
+        public void OnGet()
         {
+            /*
             if (sessionID !> 0)
             {
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString())) 
@@ -35,6 +36,7 @@ namespace System_Shopper.Pages
                     string sql = "INSERT INTO ShoppingSession(";
                 }
             }
+            */
 
             /*
              * 1. Create a SQL connection object
