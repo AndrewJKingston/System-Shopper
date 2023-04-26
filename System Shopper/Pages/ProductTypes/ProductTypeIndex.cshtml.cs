@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using System_Shopper.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace System_Shopper.Pages.ProductTypes
 {
+    [Authorize]
     public class ProductTypeIndex : PageModel
     {
         [BindProperty]

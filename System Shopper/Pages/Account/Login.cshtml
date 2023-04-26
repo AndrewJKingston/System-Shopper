@@ -1,7 +1,11 @@
 ﻿@page
-@model System_Shopper.Pages.Shared.Index1Model
+@model System_Shopper.Pages.Account.LoginModel
 @{
     ViewData["Title"] = "Login";
+    if (HttpContext.User.Identity != null)
+    {
+        Layout = HttpContext.User.Identity.IsAuthenticated ? "_AuthenticatedLayout" : "_Layout";
+    }
 }
 
 <div class="container">
@@ -13,18 +17,18 @@
                 </div>
                 <div class="card-body">
                     <form method="post">
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="username"><i class="bi bi-person-fill"></i> Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required autofocus>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" asp-for="LoginInfo.Username" required autofocus>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="password"><i class="bi bi-lock-fill"></i> Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" asp-for="LoginInfo.Password" required>
                         </div>
                         <div class="form-group mb-2">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Page("/CreateAccount")'">Create Account</button>
                         </div>
                     </form>

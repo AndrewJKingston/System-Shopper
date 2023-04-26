@@ -2,6 +2,10 @@
 @model System_Shopper.Pages.Manufacturers.EditManufacturerModel
 @{
     ViewData["Title"] = "Edit Manufacturer";
+    if (HttpContext.User.Identity != null)
+    {
+        Layout = HttpContext.User.Identity.IsAuthenticated ? "_AuthenticatedLayout" : "_Layout";
+    }
 }
 
 <script type="text/javascript">

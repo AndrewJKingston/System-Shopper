@@ -2,6 +2,10 @@
 @model System_Shopper.Pages.Manufacturers.IndexModel
 @{
     ViewData["Title"] = "Manufacturers";
+    if (HttpContext.User.Identity != null)
+    {
+        Layout = HttpContext.User.Identity.IsAuthenticated ? "_AuthenticatedLayout" : "_Layout";
+    }
 }
 
 <div class="container">

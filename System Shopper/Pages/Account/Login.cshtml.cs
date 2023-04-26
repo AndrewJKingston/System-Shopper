@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
-namespace System_Shopper.Pages.Shared
+namespace System_Shopper.Pages.Account
 {
     public class LoginModel : PageModel
     {
@@ -22,15 +22,15 @@ namespace System_Shopper.Pages.Shared
 
         }
 
-        public async Task<IActionResult> asyncOnPost(string username, string password)
+        public async Task<IActionResult> OnPost()
         {
             // TODO: Add authentication logic
             // If authentication is successful, redirect to another page
             // return RedirectToPage("/SomePage");
-            
+
             if (ModelState.IsValid)
             {
-                if (LoginInfo.Email == "admin@systemshopper.com" && LoginInfo.Password == "123412341234")
+                if (LoginInfo.Username == "Admin" && LoginInfo.Password == "1234")
                 {
                     var claims = new List<Claim> {
                         new Claim("Username", "Admin"),
@@ -39,7 +39,7 @@ namespace System_Shopper.Pages.Shared
 
                     var identity = new ClaimsIdentity(claims, "LoginCookie");
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
-                    await HttpContext.SignInAsync(principal);
+                    await HttpContext.SignInAsync("LoginCookie", principal);
 
                     return RedirectToPage("/Index");
                 }
@@ -53,7 +53,7 @@ namespace System_Shopper.Pages.Shared
 
     public class Credential
     {
-        public string Email { get; set; }
+        public string Username { get; set; }
 
         public string Password { get; set; }
     }

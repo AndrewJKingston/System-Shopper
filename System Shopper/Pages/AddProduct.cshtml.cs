@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,7 +8,7 @@ using System_Shopper.Models;
 
 namespace System_Shopper.Pages
 {
-
+    [Authorize]
     public class AddProductModel : PageModel
     {
         [BindProperty]

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -5,6 +6,7 @@ using System_Shopper.Models;
 
 namespace System_Shopper.Pages.Manufacturers
 {
+    [Authorize]
     public class EditManufacturerModel : PageModel
     {
         [BindProperty]
