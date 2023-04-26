@@ -5,6 +5,15 @@ using System_Shopper.Models;
 
 namespace System_Shopper.Pages
 {
+    public class IndexController : Controller
+    {
+        public IActionResult Index()
+        {
+
+            return View();
+        }
+    }
+
     public class IndexModel : PageModel
     {
         [BindProperty]
@@ -17,8 +26,16 @@ namespace System_Shopper.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGet(int sessionID)
         {
+            if (sessionID !> 0)
+            {
+                using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString())) 
+                {
+                    string sql = "INSERT INTO ShoppingSession(";
+                }
+            }
+
             /*
              * 1. Create a SQL connection object
              * 2. Construct a SQL statement
