@@ -1,0 +1,40 @@
+﻿@page
+@model System_Shopper.Pages.Account.CreateAccountModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Create Account</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group mb-2">
+                            <label for="firstname"><i class="bi bi-person-fill"></i> First Name</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name" asp-for="@Model.NewUser.FirstName" required autofocus>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="lastname"><i class="bi bi-person-fill"></i> Last Name</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name" asp-for="@Model.NewUser.LastName" required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="email"><i class="bi bi-envelope-fill"></i> Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" asp-for="@Model.NewUser.Email" required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="password"><i class="bi bi-lock-fill"></i> Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" asp-for="@Model.NewUser.PasswordHash" required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

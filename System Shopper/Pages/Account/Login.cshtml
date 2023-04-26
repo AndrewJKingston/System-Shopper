@@ -18,8 +18,8 @@
                 <div class="card-body">
                     <form method="post">
                         <div class="form-group mb-2">
-                            <label for="username"><i class="bi bi-person-fill"></i> Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" asp-for="LoginInfo.Username" required autofocus>
+                            <label for="email"><i class="bi bi-envelope-fill"></i> Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" asp-for="LoginInfo.Email" required autofocus>
                         </div>
                         <div class="form-group mb-2">
                             <label for="password"><i class="bi bi-lock-fill"></i> Password</label>
@@ -28,8 +28,11 @@
                         <div class="form-group mb-2">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
+                        <div>
+                            <h6>Don't have an account?</h6>
+                        </div>
                         <div class="form-group mb-2">
-                            <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Page("/CreateAccount")'">Create Account</button>
+                            <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Page("/Account/CreateAccount")'">Create Account</button>
                         </div>
                     </form>
                 </div>

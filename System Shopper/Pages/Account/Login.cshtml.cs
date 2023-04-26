@@ -30,11 +30,11 @@ namespace System_Shopper.Pages.Account
 
             if (ModelState.IsValid)
             {
-                if (LoginInfo.Username == "Admin" && LoginInfo.Password == "1234")
+                if (LoginInfo.Email == "admin@systemshopper.com" && LoginInfo.Password == "1234")
                 {
                     var claims = new List<Claim> {
-                        new Claim("Username", "Admin"),
-                        new Claim(ClaimTypes.Name, "Andrew")
+                        new Claim(ClaimTypes.Email, "Admin"),
+                    new Claim(ClaimTypes.Name, "Andrew")
                     };
 
                     var identity = new ClaimsIdentity(claims, "LoginCookie");
@@ -48,12 +48,15 @@ namespace System_Shopper.Pages.Account
             // If authentication fails, show an error message
             ModelState.AddModelError("", "Invalid login attempt.");
             return Page();
+
+
+
         }
     }
 
     public class Credential
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
 
         public string Password { get; set; }
     }
