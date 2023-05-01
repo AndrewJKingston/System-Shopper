@@ -169,4 +169,20 @@
             </div>
         }
     </div>
+    <div id="SystemListSubtotal" class="p-1">
+        @{
+            decimal subtotal = 0.00M;
+            foreach (var product in Model.ProductsInList)
+            {
+                foreach (var productList in Model.ProductList)
+                {
+                    if (product.ProductId == productList.ProductID)
+                    {
+                        subtotal += product.Price * productList.Quantity;
+                    }
+                }
+            }
+        }
+        <h6>Subtotal: $@subtotal</h6>
+    </div>
 </div>

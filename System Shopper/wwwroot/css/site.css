@@ -30,7 +30,7 @@ label {
     position: fixed;
     font-weight: bold;
     top: 10%;
-    right: -5px;
+    right: 0px;
     width: 150px;
     height: 35px;
     border-style: solid;
@@ -51,6 +51,19 @@ label {
     border-radius: 5px;
     border-width: 2px;
     overflow-y: scroll;
+}
+
+#SystemListSubtotal {
+    position: fixed;
+    top: 80%;
+    right: 0px;
+    width: 150px;
+    height: 35px;
+    background-color: #8390FA;
+    border-style: solid;
+    border-color: #1D2F6F;
+    border-radius: 5px;
+    border-width: 2px;
 }
 
 #ListTrigger:hover {
