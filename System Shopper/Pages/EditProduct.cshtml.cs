@@ -32,6 +32,18 @@ namespace System_Shopper.Pages
             PopulateDiscounts();
         }
 
+        /*
+         * public void OnGet(int id) {
+         *      using(SqlConnection conn
+         *          string sql = "DELETE FROM Product WHERE ProductID = @productId"
+         *          sqlcommand cmd
+         *          
+         *          cmd.parameters.addwithvalue("@productId", id);
+         *          
+         * }
+         */
+
+
         private void PopulateExistingProduct()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))

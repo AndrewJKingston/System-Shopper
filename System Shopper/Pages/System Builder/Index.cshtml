@@ -117,6 +117,15 @@
             }
         </div>
     </div>
+    <!-- TEST Display system list quantities -->
+    <div class="row">
+        <div class="col-6">
+            @foreach (var productList in Model.ProductList)
+            {
+                <p>Quantity: @productList.Quantity</p>
+            }
+        </div>
+    </div>
     <!-- System List -->
     <div id="SystemListLabel" style="background-color: #8390FA" class="p-1">
         <h5>Your System: </h5>
