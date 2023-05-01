@@ -42,7 +42,7 @@ label {
 #SystemList {
     position: fixed;
     top: 150px;
-    right: -5px;
+    right: 0px;
     width: 305px;
     height: 75%;
     background-color: #8390FA;
@@ -50,7 +50,7 @@ label {
     border-color: #1D2F6F;
     border-radius: 5px;
     border-width: 2px;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 #ListTrigger:hover {
