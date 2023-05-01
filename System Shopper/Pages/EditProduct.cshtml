@@ -12,6 +12,7 @@
     function validateInput() {
         var isValid = true;
         var productName = document.getElementById("inputProductName");
+        var productType = document.getElementById("inputProductType");
         var productDescription = document.getElementById("inputProductDescription");
         var productPrice = document.getElementById("inputPrice");
         var manufacturerId = document.getElementById("inputManufacturerId");
@@ -21,6 +22,10 @@
         if (productName.value == "") {
             isValid = false;
             document.getElementById("productNameError").innerHTML = required;
+        }
+        if (productType.options[productType.selectedIndex].text == "") {
+            isValid = false;
+            document.getElementById("productTypeError").innerHTML = required;
         }
         if (productDescription.value == "") {
             isValid = false;
@@ -81,7 +86,16 @@
             <select class="rounded" id="ddlManufacturers" selected="@Model.ExistingProduct.ManufacturerId" asp-for="ExistingProduct.ManufacturerId" asp-items="@Model.Manufacturers"></select>
         </div>
         <span asp-validation-for="ExistingProduct.ManufacturerId" class="text-danger" id="productManufacturerError"></span>
+    </div>
+    <!-- Product Type -->
+    <div class="row mb-3">
+        <label for="ddlProductTypes" class="col-sm-2 col-form-label"><b>Product Type:</b></label>
+        <div class="col-sm-10">
+            <select class="rounded" id="ddlProductTypes" asp-for="ExistingProduct.ProductType" asp-items="@Model.ProductTypes">
+                <option value="" disabled selected>Select a Product Type</option>
+            </select>
         </div>
+    </div>
     <!-- Product Discount -->
     <div class="row mb-3">
         <label for="ddlDiscounts" class="col-sm-2 col-form-label"><b>Discount:</b></label>
