@@ -129,7 +129,7 @@ namespace System_Shopper.Pages
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     string sql = "UPDATE Product " +
-                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, ProductType = @productType, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
+                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, ProductTypeID = @productType, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
                         "WHERE ProductId = @productId;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
