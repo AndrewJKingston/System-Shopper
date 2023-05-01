@@ -29,7 +29,7 @@ label {
 #SystemListLabel {
     position: fixed;
     font-weight: bold;
-    top: 100px;
+    top: 10%;
     right: -5px;
     width: 150px;
     height: 35px;
@@ -41,10 +41,10 @@ label {
 
 #SystemList {
     position: fixed;
-    top: 150px;
+    top: 15%;
     right: 0px;
     width: 305px;
-    height: 75%;
+    height: 60%;
     background-color: #8390FA;
     border-style: solid;
     border-color: #1D2F6F;
