@@ -52,7 +52,7 @@ namespace System_Shopper.Pages
                         ExistingProduct.Price = decimal.Parse(reader["Price"].ToString());
                         ExistingProduct.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         ExistingProduct.ProductImage = reader["ProductImage"].ToString();
-                        ExistingProduct.ProductType = int.Parse(reader["ProductType"].ToString());
+                        ExistingProduct.ProductType = int.Parse(reader["ProductTypeID"].ToString());
                     }
                 }
             }
