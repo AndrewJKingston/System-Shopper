@@ -27,6 +27,14 @@ namespace System_Shopper.Pages.System_Builder
 
         public void OnGet()
         {
+            PopulateSystemList();
+            PopulateProducts();
+            PopulateProductList(SystemList.SystemListId);
+            PopulateProductsInList();
+        }
+
+        public void PopulateSystemList()
+        {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
                 string sql = "SELECT * FROM SystemList WHERE EXISTS(SELECT * FROM SystemList WHERE ShoppingSessionID=1)";
@@ -62,19 +70,17 @@ namespace System_Shopper.Pages.System_Builder
                         }
                     }
                 }
+                /*                
+                
+                string sql2 = "SELECT * FROM ProductList WHERE SystemListID=@systemListId";
 
-                /*                string sql2 = "SELECT * FROM ProductList WHERE SystemListID=@systemListId";
+                SqlCommand cmd2 = new SqlCommand(sql2, conn);
+                conn.Open();
 
-                                SqlCommand cmd2 = new SqlCommand(sql2, conn);
-                                conn.Open();
-
-                                cmd2.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
+                cmd2.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                 */
-            }
 
-            PopulateProducts();
-            PopulateProductList(SystemList.SystemListId);
-            PopulateProductsInList();
+            }
         }
 
         public void PopulateProducts()

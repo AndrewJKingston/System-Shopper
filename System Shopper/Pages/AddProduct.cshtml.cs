@@ -114,7 +114,7 @@ namespace System_Shopper.Pages
                 {
                     // Step 2
                     string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId, DiscountId, ProductType) " +
-                        "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId, @discountId. @productType)";
+                        "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId, @discountId, @productType)";
 
                     // Step 3
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -141,4 +141,4 @@ namespace System_Shopper.Pages
         }
     }
     
-    }
+}
