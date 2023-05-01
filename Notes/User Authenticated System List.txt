@@ -1,0 +1,16 @@
+On User Login
+	Create new shopping session
+		Insert Into ShoppingSession (UserId), Values (UserId)
+
+On Visit to System Builder page (OnGet)
+	If SystemList table does not have ShoppingSessionId
+		Insert Into SystemList (ShoppingSessionId), Values (ShoppingSessionId)
+	Else 
+		Select * From SystemList Where ShoppingSessionId=ShoppingSessionId
+		Get SystemListId
+		PopulateSystemList from Select * From ProductList Where SystemListId=SystemListId
+		PopulateProductList from Select * From Product Where ProductId=ProductId
+
+	Display Product List
+	On Add Product To List (OnPost)
+		Insert Into ProductList (SystemListId, ProductId), Values (SystemListId, ProductId)

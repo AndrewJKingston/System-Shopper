@@ -116,15 +116,32 @@
                 </div>
             }
         </div>
-        <!-- System List -->
-        <div id="SystemListLabel" style="background-color: #8390FA">
-            <h5>Your System: </h5>
-        </div>
-        <div id="SystemList" class="pt-1">
-            @foreach (var product in Model.ProductsInList)
-            {
-                <h5>@product.ProductName</h5>
-            }
-        </div>
+    </div>
+    <!-- System List -->
+    <div id="SystemListLabel" style="background-color: #8390FA" class="p-1">
+        <h5>Your System: </h5>
+    </div>
+    <div id="SystemList" class="p-2">
+        @foreach (var product in Model.ProductsInList)
+        {
+            <div class="row">
+                <div class="col">
+                    <img style="width: 50px; display: inline;" class="img-fluid" src="@product.ProductImage" alt="Product Image" />
+                </div>
+                <div class="col">
+                    <h5><b>$@product.Price</b></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10">
+                    <p>@product.ProductName</p>
+                </div>
+            </div>
+            <div class="row">
+                <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/RemoveProductFromList" asp-route-id="@product.ProductId" class="btn mb-3">
+                    <i class="bi bi-x-circle mx-1"></i> Remove
+                </a>
+            </div>
+        }
     </div>
 </div>

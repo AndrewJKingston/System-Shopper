@@ -28,26 +28,17 @@ namespace System_Shopper.Pages
 
         public void OnGet()
         {
-            /*
-            if (sessionID !> 0)
-            {
-                using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString())) 
-                {
-                    string sql = "INSERT INTO ShoppingSession(";
-                }
-            }
-            */
+//            PopulateDiscounts
+            PopulateProducts();
+        }
 
-            /*
-             * 1. Create a SQL connection object
-             * 2. Construct a SQL statement
-             * 3. Create a SQL command object
-             * 4. Open the SQL connection
-             * 5. Execute the SQL command
-             * 6. Close the SQL connection
-             */
+//        PopulateDiscounts()
+//        {
 
-            // Step 1
+//        }
+
+        public void PopulateProducts()
+        {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
                 // Step 2
@@ -73,12 +64,19 @@ namespace System_Shopper.Pages
                         product.Price = decimal.Parse(reader["Price"].ToString());
                         product.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         product.ProductImage = reader["ProductImage"].ToString();
-                        //product.ProductType = int.Parse(reader["ProductTypeId"].ToString());
+                        product.ProductType = int.Parse(reader["ProductTypeId"].ToString());
+
+                        /*
+                        if (discountId != 3) 
+                        {
+                            product.Price = product.Price * (100 - discountPercent) / 100);
+                        }
+                        */
+
                         ProductList.Add(product);
                     }
                 }
             }
-
         }
     }
 }
