@@ -91,7 +91,7 @@
     <div class="row mb-3">
         <label for="ddlProductTypes" class="col-sm-2 col-form-label"><b>Product Type:</b></label>
         <div class="col-sm-10">
-            <select class="rounded" id="ddlProductTypes" asp-for="ExistingProduct.ProductType" asp-items="@Model.ProductTypes">
+            <select class="rounded" id="ddlProductTypes" selected="@Model.ExistingProduct.ProductType" asp-for="ExistingProduct.ProductType" asp-items="@Model.ProductTypes">
                 <option value="" disabled selected>Select a Product Type</option>
             </select>
         </div>
