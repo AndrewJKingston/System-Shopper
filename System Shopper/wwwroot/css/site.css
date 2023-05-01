@@ -44,11 +44,13 @@ label {
     top: 150px;
     right: -5px;
     width: 305px;
+    height: 75%;
     background-color: #8390FA;
     border-style: solid;
     border-color: #1D2F6F;
     border-radius: 5px;
     border-width: 2px;
+    overflow: auto;
 }
 
 #ListTrigger:hover {

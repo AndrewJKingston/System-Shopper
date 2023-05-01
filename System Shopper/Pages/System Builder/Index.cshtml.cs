@@ -54,7 +54,7 @@ namespace System_Shopper.Pages.System_Builder
                     SqlCommand cmd3 = new SqlCommand(sql, conn);
 
                     SqlDataReader reader2 = cmd3.ExecuteReader();
-                    if (reader.HasRows)
+                    if (reader2.HasRows)
                     {
                         while (reader2.Read())
                         {

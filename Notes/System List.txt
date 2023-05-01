@@ -1,0 +1,13 @@
+On connection 
+
+If no ShoppingSessionId
+	Create new ShoppingSession
+
+On Visit to SystemBuilder
+If SystemList does not contain ShoppingSessionId
+	Create new SystemList
+Else
+	OnGet, retrieve ProductList products linked to SystemList
+
+When user Add Product to List
+	OnPost, add Product to ProductList
