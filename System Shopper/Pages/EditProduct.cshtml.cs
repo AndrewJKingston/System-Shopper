@@ -32,6 +32,18 @@ namespace System_Shopper.Pages
             PopulateDiscounts();
         }
 
+        /*
+         * public void OnGet(int id) {
+         *      using(SqlConnection conn
+         *          string sql = "DELETE FROM Product WHERE ProductID = @productId"
+         *          sqlcommand cmd
+         *          
+         *          cmd.parameters.addwithvalue("@productId", id);
+         *          
+         * }
+         */
+
+
         private void PopulateExistingProduct()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
@@ -52,6 +64,7 @@ namespace System_Shopper.Pages
                         ExistingProduct.Price = decimal.Parse(reader["Price"].ToString());
                         ExistingProduct.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         ExistingProduct.ProductImage = reader["ProductImage"].ToString();
+                        ExistingProduct.ProductType = int.Parse(reader["ProductTypeID"].ToString());
                     }
                 }
             }
@@ -128,18 +141,19 @@ namespace System_Shopper.Pages
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     string sql = "UPDATE Product " +
-                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
+                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, ProductTypeID = @productType, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
                         "WHERE ProductId = @productId;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@productName", ExistingProduct.ProductName);
                     cmd.Parameters.AddWithValue("@productDescription", ExistingProduct.ProductDescription);
                     cmd.Parameters.AddWithValue("@manufacturerId", ExistingProduct.ManufacturerId);
+                    cmd.Parameters.AddWithValue("@productType", ExistingProduct.ProductType);
                     cmd.Parameters.AddWithValue("@price", ExistingProduct.Price);
                     cmd.Parameters.AddWithValue("@discountId", ExistingProduct.DiscountId);
                     cmd.Parameters.AddWithValue("@productImage", ExistingProduct.ProductImage);
                     cmd.Parameters.AddWithValue("@productId", ExistingProduct.ProductId);
-                    cmd.Parameters.AddWithValue("@productType", ExistingProduct.ProductType);
+
                     conn.Open();
 
                     cmd.ExecuteNonQuery();
