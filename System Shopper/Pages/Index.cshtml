@@ -35,7 +35,11 @@
                 <!-- Product Name and Price-->
                 <div class="row">
                     <div class="col-sm-9">
-                        <h4>@product.ProductName</h4>
+                        <h4>
+                            <a asp-page="ProductPage" asp-route-id="@product.ProductId">
+                                @product.ProductName
+                            </a>
+                        </h4>
                     </div>
                     <div class="col-sm-3">
                         <h3>$<b>@product.Price</b></h3>
