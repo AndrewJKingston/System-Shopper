@@ -79,7 +79,6 @@ namespace System_Shopper.Pages.System_Builder
 
                 cmd2.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                 */
-
             }
         }
 
@@ -130,7 +129,7 @@ namespace System_Shopper.Pages.System_Builder
                         ProductList productList = new ProductList();
                         productList.SystemListID = int.Parse(reader["SystemListID"].ToString());
                         productList.ProductID = int.Parse(reader["ProductID"].ToString());
-//                        productList.Quantity = int.Parse(reader["Quantity"].ToString());
+                        productList.Quantity = int.Parse(reader["Quantity"].ToString());
                         ProductList.Add(productList);
                     }
                 }
