@@ -41,7 +41,7 @@ label {
 
 #SystemList {
     position: fixed;
-    top: 15%;
+    top: 17%;
     right: 0px;
     width: 305px;
     height: 60%;
@@ -55,9 +55,9 @@ label {
 
 #SystemListSubtotal {
     position: fixed;
-    top: 80%;
+    top: 77%;
     right: 0px;
-    width: 150px;
+    width: 200px;
     height: 35px;
     background-color: #8390FA;
     border-style: solid;
