@@ -113,7 +113,7 @@ namespace System_Shopper.Pages
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     // Step 2
-                    string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId, DiscountId, ProductType) " +
+                    string sql = "INSERT INTO Product(ProductName, ProductDescription, Price, ProductImage, ManufacturerId, DiscountId, ProductTypeId) " +
                         "VALUES(@productName, @productDescription, @price, @productImage, @manufacturerId, @discountId, @productType)";
 
                     // Step 3
