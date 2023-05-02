@@ -22,7 +22,7 @@ namespace System_Shopper.Pages.Discounts
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
                 // Step 2
-                string sql = "SELECT DiscountName, DiscountPercent FROM Discount";
+                string sql = "SELECT DiscountID, DiscountName, DiscountPercent FROM Discount";
 
                 // Step 3
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -39,7 +39,7 @@ namespace System_Shopper.Pages.Discounts
                         Discount discount = new Discount();
                         discount.DiscountName = reader["DiscountName"].ToString();
                         discount.DiscountPercent = decimal.Parse(reader["DiscountPercent"].ToString());
-
+                        discount.DiscountId = int.Parse(reader["DiscountID"].ToString());
                         GetDiscountList.Add(discount);
                     }
                 }
@@ -54,7 +54,7 @@ namespace System_Shopper.Pages.Discounts
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     // Step 2
-                    string sql = "INSERT INTO Discount(DiscountName, DiscountPercent)" + "VALUES(@DiscountName, @DiscountPercent)";
+                    string sql = "INSERT INTO Discount (DiscountName, DiscountPercent) VALUES (@DiscountName, @DiscountPercent)";
 
                     // Step 3
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -65,15 +65,16 @@ namespace System_Shopper.Pages.Discounts
                     conn.Open();
 
                     // Step 5
-                    cmd.ExecuteNonQuery();
-                }
-                return RedirectToPage("/Index");
-            }
-            else
-            {
-                return Page();
-            }
-        }
+                    int rowsAffected = cmd.ExecuteNonQuery();
 
+                    // Step 6
+                    if (rowsAffected > 0)
+                    {
+                        return RedirectToPage();
+                    }
+                }
+            }
+            return Page();
+        }
     }
 }

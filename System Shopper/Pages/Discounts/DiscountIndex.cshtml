@@ -14,7 +14,27 @@
     </div>
     <div class="form-group">
         <label for="DiscountPercent">Discount Percent:</label>
-        <input type="number" id="DiscountPercent" name="DiscountPercent" class="form-control" step="0.01" min="0" max="100" required />
+        <input type="number" id="DiscountPercent" name="DiscountPercent" class="form-control" step="0.01" min="0" max="100" asp-for="@Model.NewDiscount.DiscountPercent" required />
     </div>
     <button type="submit" style="background-color: #FAC748;" class="btn mt-2">Add Discount</button>
 </form>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Value (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var discount in Model.GetDiscountList)
+        {
+            <tr>
+                <td>@discount.DiscountId</td>
+                <td>@discount.DiscountName</td>
+                <td>@discount.DiscountPercent</td>
+            </tr>
+        }
+    </tbody>
+</table>
