@@ -32,6 +32,18 @@ namespace System_Shopper.Pages
             PopulateDiscounts();
         }
 
+        /*
+         * public void OnGet(int id) {
+         *      using(SqlConnection conn
+         *          string sql = "DELETE FROM Product WHERE ProductID = @productId"
+         *          sqlcommand cmd
+         *          
+         *          cmd.parameters.addwithvalue("@productId", id);
+         *          
+         * }
+         */
+
+
         private void PopulateExistingProduct()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
@@ -52,7 +64,7 @@ namespace System_Shopper.Pages
                         ExistingProduct.Price = decimal.Parse(reader["Price"].ToString());
                         ExistingProduct.DiscountId = int.Parse(reader["DiscountId"].ToString());
                         ExistingProduct.ProductImage = reader["ProductImage"].ToString();
-                        ExistingProduct.ProductType = int.Parse(reader["ProductTypeId"].ToString());
+                        ExistingProduct.ProductType = int.Parse(reader["ProductTypeID"].ToString());
                     }
                 }
             }
@@ -129,7 +141,7 @@ namespace System_Shopper.Pages
                 using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
                 {
                     string sql = "UPDATE Product " +
-                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, ProductTypeId = @productType, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
+                        "SET ProductName = @productName, ProductDescription = @productDescription, ManufacturerId = @manufacturerId, ProductTypeID = @productType, Price = @price, DiscountId = @discountId, ProductImage = @productImage " +
                         "WHERE ProductId = @productId;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -146,7 +158,7 @@ namespace System_Shopper.Pages
 
                     cmd.ExecuteNonQuery();
                 }
-                return RedirectToPage("/Index");
+                return RedirectToPage("Index");
             }
             else
             {

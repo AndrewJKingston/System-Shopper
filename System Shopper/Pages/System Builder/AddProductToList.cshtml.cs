@@ -13,9 +13,11 @@ namespace System_Shopper.Pages.System_Builder
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
                 // Check if ProductList contains id
-                string sql = "SELECT * FROM ProductList WHERE SystemListID = 1";
+                string sql = "SELECT * FROM ProductList WHERE SystemListID = 1 AND ProductID = @productId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@productId", id);
+
                 conn.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -28,6 +30,8 @@ namespace System_Shopper.Pages.System_Builder
 
                     }
                 }
+                reader.Close();
+
                 // If true, increment quantity
                 if (quantity > 0)
                 {

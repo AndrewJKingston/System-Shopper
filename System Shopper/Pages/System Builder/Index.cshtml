@@ -117,6 +117,15 @@
             }
         </div>
     </div>
+    <!-- TEST Display system list quantities -->
+    <div class="row">
+        <div class="col-6">
+            @foreach (var productList in Model.ProductList)
+            {
+                <p>Quantity: @productList.Quantity</p>
+            }
+        </div>
+    </div>
     <!-- System List -->
     <div id="SystemListLabel" style="background-color: #8390FA" class="p-1">
         <h5>Your System: </h5>
@@ -125,25 +134,55 @@
         @foreach (var product in Model.ProductsInList)
         {
             <div class="row">
+                <!-- Product Image -->
                 <div class="col">
                     <img style="width: 50px; display: inline;" class="img-fluid" src="@product.ProductImage" alt="Product Image" />
                 </div>
+                <!-- Product Price -->
                 <div class="col">
                     <h5><b>$@product.Price</b></h5>
                 </div>
             </div>
             <div class="row">
+                <!-- Product Name -->
                 <div class="col-10">
                     <p>@product.ProductName</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <!-- Remove Button -->
+                <div class="col-4">
                     <a type="submit" asp-page="/System Builder/RemoveProductFromList" asp-route-id="@product.ProductId" class="btn btn-danger mb-3">
                         <i class="bi bi-x-circle mx-1"></i> Remove
                     </a>
                 </div>
+                <!-- Display Quantity -->
+                <div class="col-3">
+                    @foreach (var productList in Model.ProductList)
+                    {
+                        @if (product.ProductId == productList.ProductID)
+                        {
+                            <p>Quantity: @productList.Quantity</p>
+                        }
+                    }
+                </div>
             </div>
         }
+    </div>
+    <div id="SystemListSubtotal" class="p-1">
+        @{
+            decimal subtotal = 0.00M;
+            foreach (var product in Model.ProductsInList)
+            {
+                foreach (var productList in Model.ProductList)
+                {
+                    if (product.ProductId == productList.ProductID)
+                    {
+                        subtotal += product.Price * productList.Quantity;
+                    }
+                }
+            }
+        }
+        <h6>Subtotal: $@subtotal</h6>
     </div>
 </div>

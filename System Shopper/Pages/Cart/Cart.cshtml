@@ -1,57 +1,50 @@
 ﻿@page
-@model System_Shopper.Pages.Cart.IndexModel
+@model System_Shopper.Pages.Discounts.DiscountIndex
 @{
     ViewData["Title"] = "Cart";
-}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1 class="my-4">Shopping Cart</h1>
-        <table class="table table-striped">
-            <thead>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Discount (%)</th>
+            <th>Discounted Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+           
+            var CartItems = new List<dynamic>
+        {
+       
+        };
+
+          
+            var Discount = new Dictionary<string, decimal>
+        {
+
+        };
+
+            foreach (var item in CartItems)
+            {
+                decimal discount = Discount.ContainsKey(item.Product) ? Discount[item.Product] : 0;
+                decimal discountedPrice = item.Price * (1 - (discount / 100m));
+                decimal itemTotal = discountedPrice * item.Quantity;
+
                 <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th></th>
+                    <td>@item.Product</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@discount</td>
+                    <td>@discountedPrice.ToString("C")</td>
+                    <td>@itemTotal.ToString("C")</td>
                 </tr>
-            </thead>
-            <tbody>
-                @* Add code to load cart items from the database here *@
-                @*
-                @foreach (var item in Model.CartItems)
-                {
-                <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Price.ToString("C")</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Price * item.Quantity).ToString("C")</td>
-                <td>
-                <form asp-page-handler="RemoveFromCart" method="post">
-                <input type="hidden" asp-for="@item.ProductId" name="productId" />
-                <button type="submit" class="btn btn-danger">Remove</button>
-                </form>
-                </td>
-                </tr>
-                }
-                *@
-            </tbody>
-        </table>
-        <div class="text-right mb-3">
-            <h4>Total: @* @Model.Total.ToString("C") *@</h4>
-        </div>
-        <div class="text-right">
-            <a asp-page="/Checkout" class="btn btn-primary">Checkout</a>
-        </div>
-    </div>
-</body>
-</html>
+            }
+        }
+    </tbody>
+</table>
+
