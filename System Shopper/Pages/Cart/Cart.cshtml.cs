@@ -21,7 +21,7 @@ namespace System_Shopper.Pages.Cart
             // Fetch cart items and their related information from the database
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT * FROM CartItems JOIN Products ON CartItems.ProductId = Products.ProductId"; // Update the SQL query based on your database schema
+                string sql = "SELECT * FROM Cart JOIN Product ON Cart.ProductID = Product.ProductID"; // Update the SQL query based on your database schema
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -32,12 +32,12 @@ namespace System_Shopper.Pages.Cart
                     while (reader.Read())
                     {
                         Product product = new Product();
-                        product.ProductId = int.Parse(reader["ProductId"].ToString());
+                        product.ProductId = int.Parse(reader["ProductID"].ToString());
                         product.ProductName = reader["ProductName"].ToString();
                         product.ProductDescription = reader["ProductDescription"].ToString();
-                        product.ManufacturerId = int.Parse(reader["ManufacturerId"].ToString());
+                        product.ManufacturerId = int.Parse(reader["ManufacturerID"].ToString());
                         product.Price = decimal.Parse(reader["Price"].ToString());
-                        product.DiscountId = int.Parse(reader["DiscountId"].ToString());
+                        product.DiscountId = int.Parse(reader["DiscountID"].ToString());
                         product.ProductImage = reader["ProductImage"].ToString();
                         CartProducts.Add(product);
                     }
@@ -50,7 +50,7 @@ namespace System_Shopper.Pages.Cart
             // Insert the product into the cart table in the database
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "INSERT INTO CartItems (ProductId) VALUES (@productId)"; // Update the SQL query based on your database schema
+                string sql = "INSERT INTO Cart (ProductId) VALUES (@productId)"; // Update the SQL query based on your database schema
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@productId", id);
