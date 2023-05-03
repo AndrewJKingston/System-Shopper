@@ -18,12 +18,13 @@ namespace System_Shopper.Pages.System_Builder
         {
             PopulateShoppingSession();
             PopulateSystemList();
-            InsertProductList(id);
+//            InsertProductList(id);
             AddProductToProductList(id);
 
             return RedirectToPage("/System Builder/Index");
         }
 
+        /*
         public void InsertProductList(int id)
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
@@ -38,6 +39,7 @@ namespace System_Shopper.Pages.System_Builder
                 cmd.ExecuteNonQuery();
             }
         }
+        */
 
         public void PopulateShoppingSession()
         {
@@ -118,7 +120,6 @@ namespace System_Shopper.Pages.System_Builder
             {
                 // Check if ProductList contains id
                 string sql = "SELECT * FROM ProductList WHERE EXISTS(SELECT * FROM ProductList WHERE SystemListID = @systemListId AND ProductID = @productId)";
-                //string sql = "SELECT * FROM SystemList WHERE EXISTS(SELECT * FROM SystemList WHERE ShoppingSessionID = @shoppingSessionId)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
@@ -162,7 +163,7 @@ namespace System_Shopper.Pages.System_Builder
                     sql = "INSERT INTO ProductList (SystemListID, ProductID, Quantity) VALUES (@systemListId, @productId, @quantity)";
 
                     SqlCommand cmd3 = new SqlCommand(sql, conn);
-                    cmd3.Parameters.AddWithValue("@systemListId", 1);
+                    cmd3.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                     cmd3.Parameters.AddWithValue("@productId", id);
                     cmd3.Parameters.AddWithValue("@quantity", 1);
 
