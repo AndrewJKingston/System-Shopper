@@ -11,6 +11,9 @@ namespace System_Shopper.Pages.System_Builder
         public List<Product> Products { get; set; } = new List<Product>();
 
         [BindProperty]
+        public ShoppingSession ShoppingSession { get; set; } = new ShoppingSession();
+
+        [BindProperty]
         public SystemList SystemList { get; set; } = new SystemList();
 
         //        [BindProperty]
@@ -22,24 +25,44 @@ namespace System_Shopper.Pages.System_Builder
         [BindProperty]
         public List<Product> ProductsInList { get; set; } = new List<Product>();
 
-        //        [BindProperty]
-        //        public List<Product> SystemList { get; set; } = new List<Product>();
-
         public void OnGet()
         {
+            PopulateShoppingSession();
             PopulateSystemList();
             PopulateProducts();
             PopulateProductList(SystemList.SystemListId);
             PopulateProductsInList();
         }
 
+        public void PopulateShoppingSession()
+        {
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                string sql = "SELECT TOP 1 * FROM ShoppingSession WHERE UserID = 1 ORDER BY ShoppingSessionID DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ShoppingSession.ShoppingSessionId = int.Parse(reader["ShoppingSessionID"].ToString());
+                    }
+                }
+            }
+        }
+
         public void PopulateSystemList()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT * FROM SystemList WHERE EXISTS(SELECT * FROM SystemList WHERE ShoppingSessionID=1)";
+                string sql = "SELECT * FROM SystemList WHERE EXISTS(SELECT * FROM SystemList WHERE ShoppingSessionID = @shoppingSessionId)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
+
                 conn.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -54,12 +77,14 @@ namespace System_Shopper.Pages.System_Builder
                 reader.Close();
                 if (SystemList.SystemListId == 0)
                 {
-                    sql = "INSERT INTO SystemList (ShoppingSessionID) VALUES (1)";
+                    sql = "INSERT INTO SystemList (ShoppingSessionID) VALUES (@shoppingSessionId)";
                     SqlCommand cmd2 = new SqlCommand(sql, conn);
+                    cmd2.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
                     cmd2.ExecuteNonQuery();
 
-                    sql = "SELECT * FROM SystemList WHERE ShoppingSessionID = 1";
+                    sql = "SELECT * FROM SystemList WHERE ShoppingSessionID = @shoppingSessionId";
                     SqlCommand cmd3 = new SqlCommand(sql, conn);
+                    cmd3.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
 
                     SqlDataReader reader2 = cmd3.ExecuteReader();
                     if (reader2.HasRows)
@@ -79,7 +104,6 @@ namespace System_Shopper.Pages.System_Builder
 
                 cmd2.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                 */
-
             }
         }
 
@@ -115,7 +139,8 @@ namespace System_Shopper.Pages.System_Builder
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT * FROM ProductList WHERE SystemListID = @systemListId";
+                string sql = "SELECT * FROM ProductList WHERE EXISTS(SELECT * FROM ProductList WHERE SystemListID = @systemListId)";
+
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@systemListId", id);
@@ -130,7 +155,14 @@ namespace System_Shopper.Pages.System_Builder
                         ProductList productList = new ProductList();
                         productList.SystemListID = int.Parse(reader["SystemListID"].ToString());
                         productList.ProductID = int.Parse(reader["ProductID"].ToString());
-                        productList.Quantity = int.Parse(reader["Quantity"].ToString());
+                        if (reader.IsDBNull(reader.GetOrdinal("Quantity")))
+                        {
+                            productList.Quantity = 0;
+                        }
+                        else
+                        {
+                            productList.Quantity = int.Parse(reader["Quantity"].ToString());
+                        }
                         ProductList.Add(productList);
                     }
                 }
@@ -176,6 +208,7 @@ namespace System_Shopper.Pages.System_Builder
 
         public IActionResult OnPost(int id)
         {
+            /*
             using (SqlConnection conn = new SqlConnection( DBHelper.GetConnectionString()))
             {
                 string sql = "INSERT INTO ProductList (SystemListID, ProductID) VALUES (@systemListId, @productId)";
@@ -187,7 +220,9 @@ namespace System_Shopper.Pages.System_Builder
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
+            */
             return Page();
+            
         }
     }
 }

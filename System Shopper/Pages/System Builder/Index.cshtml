@@ -63,16 +63,31 @@
     </div>
     <div class="row">
         <!-- Categories -->
-        <form method="post">
-            <div class="col-sm-2 mt-2">
-                <input type="radio" id="filterCase" value="Case" />
+        <div class="col-sm-2 mt-2">
+            <form method="post">
+                <input type="checkbox" id="filterCase" value="Case" />
                 <label for="filterCase">Computer Cases</label>
-
-                <input type="radio" id="filterCPU" value="CPU" />
+                <br />
+                <input type="checkbox" id="filterCPU" value="CPU" />
                 <label for="filterCPU">CPUs</label>
-
-                <input type="radio" id="filterCooler" value="Coolers" />
+                <br />
+                <input type="checkbox" id="filterCooler" value="Coolers" />
                 <label for="filterCooler">CPU Coolers</label>
+                <br />
+                <input type="checkbox" id="filterGPU" value="GPU" />
+                <label for="filterGPU">Graphics Cards</label>
+                <br />
+                <input type="checkbox" id="filterMotherboard" value="Motherboard" />
+                <label for="filterMotherboard">Motherboard</label>
+                <br />
+                <input type="checkbox" id="filterRAM" value="RAM" />
+                <label for="filterRAM">Memory</label>
+                <br />
+                <input type="checkbox" id="filterStorage" value="Storage" />
+                <label for="filterStorage">Storage</label>
+                <br />
+                <input type="checkbox" id="filterPSU" value="PSU" />
+                <label for="filterPSU">Power Supply</label>
 
                 <!--<ul>
                     <li>Cases</li>
@@ -84,10 +99,10 @@
                     <li>Storage</li>
                     <li>Power Supplies</li>
                 </ul>-->
-            </div>
-        </form>
+            </form>
+        </div>
         <!-- Products -->
-        <div class="col-sm-10 mt-2">
+        <div class="col-sm-9 mt-2">
             @foreach (var product in Model.Products)
             {
                 <!--Product List-->
@@ -153,13 +168,13 @@
             </div>
             <div class="row">
                 <!-- Remove Button -->
-                <div class="col-4">
+                <div class="col-6">
                     <a type="submit" asp-page="/System Builder/RemoveProductFromList" asp-route-id="@product.ProductId" class="btn btn-danger mb-3">
                         <i class="bi bi-x-circle mx-1"></i> Remove
                     </a>
                 </div>
                 <!-- Display Quantity -->
-                <div class="col-3">
+                <div class="col-6">
                     @foreach (var productList in Model.ProductList)
                     {
                         @if (product.ProductId == productList.ProductID)
