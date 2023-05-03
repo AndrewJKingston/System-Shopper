@@ -1,0 +1,32 @@
+OnGet()
+
+PopulateShoppingSession
+	Get ShoppingSessionID based on UserID
+
+PopulateSystemList
+	Get SystemList record based on ShoppingSessionID
+	If SystemListID does not exist,
+		Insert new SystemList
+		Select new SystemList
+		Read new SystemListID
+
+PopulateProductList(SystemListID = id)
+	Get all ProductList where SystemListID = id
+	Add each ProductList to list of ProductLists
+
+PopulateProductsInList
+	Get all products from ProductList
+	Iteratively add to ProductsInList
+
+
+AddProductToList()
+	Get ShoppingSessionID based on UserID
+	Get SystemList record based on ShoppingSessionID
+	If SystemListID does not exist,
+		Insert new SystemList
+		Select new SystemList
+		Read new SystemListID
+	
+	Check if ProductList with ProductID exists
+	If yes, update
+	If no, insert new

@@ -108,22 +108,22 @@
                 <!--Product List-->
                 <div style="border-style: solid; border-color: #1D2F6F; display: inline-block" class="col-5 mb-3 p-2 rounded">
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <!-- Product Image and Price-->
                             <img style="width: 150px;" class="img-fluid" src="@product.ProductImage" alt="Product Image" /> 
                             <h3>$<b>@product.Price</b></h3>
                         </div>
                         <!-- Product Information -->
-                        <div class="col-sm-7">
+                        <div class="col-sm-8">
                             <!-- Product Name -->
                             <div class="row">
                                 <h6>@product.ProductName</h6>
                             </div>
-                            <div class="col-sm-9">
-                                <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/AddProductToList" asp-route-id="@product.ProductId" class="btn mb-3">
+                            <div class="col-sm-12">
+                                <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/AddProductToList" asp-route-id="@product.ProductId" class="btn mb-1">
                                     <i class="bi bi-plus mx-1"></i> Add To System
                                 </a>
-                                <a type="submit" style="background-color: #28a745;" asp-page="/Cart/AddToCart" asp-route-id="@product.ProductId" class="btn mb-3">
+                                <a type="submit" style="background-color: #28a745;" asp-page="/Cart/AddToCart" asp-route-id="@product.ProductId" class="btn mb-1">
                                     <i class="bi bi-cart-plus mx-1"></i> Add To Cart
                                 </a>
                             </div>
