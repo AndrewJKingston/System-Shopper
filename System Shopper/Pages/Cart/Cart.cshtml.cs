@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System_Shopper.Models;
 using System.Collections.Generic;
@@ -52,6 +53,33 @@ namespace System_Shopper.Pages.Cart
                     }
                 }
             }
+        }
+
+        public IActionResult OnPostDeleteFromCart(int id)
+        {
+            // Delete the product from the cart table in the database
+            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
+            {
+                // Assuming there is a ShoppingSessionID associated with the UserID (1 in this case)
+                string sql = @"
+                    DELETE FROM Cart 
+                    WHERE ProductID = @productId 
+                    AND ShoppingSessionID IN (
+                        SELECT TOP 1 ShoppingSessionID 
+                        FROM ShoppingSession 
+                        WHERE UserID = 1 
+                        ORDER BY ShoppingSessionID DESC
+                    );
+                ";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@productId", id);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            return RedirectToPage();
         }
     }
 }

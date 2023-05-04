@@ -16,6 +16,7 @@
             <th>Discount (%)</th>
             <th>Discounted Price</th>
             <th>Total</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +33,13 @@
                 <td>@discount</td>
                 <td>@discountedPrice.ToString("C")</td>
                 <td>@itemTotal.ToString("C")</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="id" value="@item.ProductId" />
+                        <button type="submit" asp-page-handler="DeleteFromCart" class="btn btn-danger">Delete</button>
+                    </form>
+
+                </td>
             </tr>
         }
     </tbody>
