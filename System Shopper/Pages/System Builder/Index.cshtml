@@ -8,6 +8,7 @@
     }
 }
 
+<!--
 <script type="text/javascript">
 
     const SystemListOut = [
@@ -41,6 +42,7 @@
         }
     });
 </script>
+-->
 
 <div class="container">
     <!-- Title -->
@@ -51,11 +53,6 @@
     </div>
     <!--
     <div class="row">
-        <div class="col-sm-8">
-            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">A-Z</a>
-            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Z-A</a>
-            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Price</a>
-        </div>
         <div style="background-color: #8390FA" class="col-sm-4 mt-3">
             <div id="ListTrigger">System Items</div>
         </div> 
@@ -93,8 +90,8 @@
                 <input type="checkbox" id="filterPSU" value="PSU" />
                 <label for="filterPSU">Power Supply</label><br />
 
-                <button style="background-color: #FAC748;" class="btn mb-1">Clear</button><br />
-                <button style="background-color: #FAC748;" class="btn" type="submit">Filter</button>
+                <button style="background-color: #FAC748;" class="btn mb-1 mr-1" type="submit"><b>Filter</b></button>
+                <button style="background-color: #FAC748;" class="btn mb-1"><b>Clear</b></button>
                 <!--
                 Cases
                 CPUs
@@ -127,10 +124,10 @@
                             </div>
                             <div class="col-sm-12">
                                 <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/AddProductToList" asp-route-id="@product.ProductId" class="btn mb-1">
-                                    <i class="bi bi-plus mx-1"></i> Add To System
+                                    <i class="bi bi-plus mx-1"></i> <b>Add To System</b>
                                 </a>
                                 <a type="submit" style="background-color: #28a745;" asp-page="/Cart/AddToCart" asp-route-id="@product.ProductId" class="btn mb-1">
-                                    <i class="bi bi-cart-plus mx-1"></i> Add To Cart
+                                    <i class="bi bi-cart-plus mx-1"></i> <b>Add To Cart</b>
                                 </a>
                             </div>
 
@@ -141,6 +138,7 @@
         </div>
     </div>
     <!-- TEST Display system list quantities -->
+    @*
     <div class="row">
         <div class="col-6">
             @foreach (var productList in Model.ProductList)
@@ -149,6 +147,7 @@
             }
         </div>
     </div>
+    *@
     <!-- System List -->
     <div id="SystemListLabel" style="background-color: #8390FA" class="p-1">
         <h5>Your System: </h5>

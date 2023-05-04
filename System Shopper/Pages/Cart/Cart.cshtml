@@ -2,6 +2,10 @@
 @model System_Shopper.Pages.Cart.IndexModel
 @{
     ViewData["Title"] = "Cart";
+    if (HttpContext.User.Identity != null)
+    {
+        Layout = HttpContext.User.Identity.IsAuthenticated ? "_AuthenticatedLayout" : "_Layout";
+    }
 }
 <table class="table">
     <thead>
