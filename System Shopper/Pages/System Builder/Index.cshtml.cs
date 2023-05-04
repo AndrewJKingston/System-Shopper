@@ -139,7 +139,7 @@ namespace System_Shopper.Pages.System_Builder
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT * FROM ProductList WHERE EXISTS(SELECT * FROM ProductList WHERE SystemListID = @systemListId)";
+                string sql = "SELECT * FROM ProductList WHERE SystemListID = @systemListId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
