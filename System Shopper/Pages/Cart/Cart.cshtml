@@ -19,32 +19,20 @@
         </tr>
     </thead>
     <tbody>
-        @{
-            var CartItems = new List<dynamic>
-            {
+        @foreach (var item in Model.CartItems)
+        {
+            decimal discount = item.DiscountPercent;
+            decimal discountedPrice = item.Price * (1 - (discount / 100m));
+            decimal itemTotal = discountedPrice * item.Quantity;
 
-            };
-
-            var Discount = new Dictionary<string, decimal>
-            {
-
-            };
-
-            foreach (var item in CartItems)
-            {
-                decimal discount = Discount.ContainsKey(item.Product) ? Discount[item.Product] : 0;
-                decimal discountedPrice = item.Price * (1 - (discount / 100m));
-                decimal itemTotal = discountedPrice * item.Quantity;
-
-                <tr>
-                    <td>@item.Product</td>
-                    <td>@item.Price</td>
-                    <td>@item.Quantity</td>
-                    <td>@discount</td>
-                    <td>@discountedPrice.ToString("C")</td>
-                    <td>@itemTotal.ToString("C")</td>
-                </tr>
-            }
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.Quantity</td>
+                <td>@discount</td>
+                <td>@discountedPrice.ToString("C")</td>
+                <td>@itemTotal.ToString("C")</td>
+            </tr>
         }
     </tbody>
 </table>

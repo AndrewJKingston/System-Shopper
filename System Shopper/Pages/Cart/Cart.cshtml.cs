@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
 using System_Shopper.Models;
 using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 
 namespace System_Shopper.Pages.Cart
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
-        public List<Product> CartProducts { get; set; } = new List<Product>();
+        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
 
         public void OnGet()
         {
@@ -18,10 +16,19 @@ namespace System_Shopper.Pages.Cart
 
         public void PopulateCartProducts()
         {
-            // Fetch cart items and their related information from the database
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT * FROM Cart JOIN Product ON Cart.ProductID = Product.ProductID"; // Update the SQL query based on your database schema
+                // Assuming there is a ShoppingSessionID associated with the UserID (1 in this case)
+                string sql = @"
+                    SELECT 
+                        P.ProductID, P.ProductName, P.ProductDescription, P.ManufacturerID, 
+                        P.Price, P.DiscountID, P.ProductImage, C.Quantity, D.DiscountPercent
+                    FROM Cart C
+                    JOIN Product P ON C.ProductID = P.ProductID
+                    JOIN ShoppingSession SS ON C.ShoppingSessionID = SS.ShoppingSessionID
+                    JOIN Discount D ON P.DiscountID = D.DiscountID
+                    WHERE SS.UserID = 1;
+                ";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -31,34 +38,20 @@ namespace System_Shopper.Pages.Cart
                 {
                     while (reader.Read())
                     {
-                        Product product = new Product();
-                        product.ProductId = int.Parse(reader["ProductID"].ToString());
-                        product.ProductName = reader["ProductName"].ToString();
-                        product.ProductDescription = reader["ProductDescription"].ToString();
-                        product.ManufacturerId = int.Parse(reader["ManufacturerID"].ToString());
-                        product.Price = decimal.Parse(reader["Price"].ToString());
-                        product.DiscountId = int.Parse(reader["DiscountID"].ToString());
-                        product.ProductImage = reader["ProductImage"].ToString();
-                        CartProducts.Add(product);
+                        CartItem cartItem = new CartItem();
+                        cartItem.ProductId = int.Parse(reader["ProductID"].ToString());
+                        cartItem.ProductName = reader["ProductName"].ToString();
+                        cartItem.ProductDescription = reader["ProductDescription"].ToString();
+                        cartItem.ManufacturerId = int.Parse(reader["ManufacturerID"].ToString());
+                        cartItem.Price = decimal.Parse(reader["Price"].ToString());
+                        cartItem.DiscountId = int.Parse(reader["DiscountID"].ToString());
+                        cartItem.ProductImage = reader["ProductImage"].ToString();
+                        cartItem.Quantity = int.Parse(reader["Quantity"].ToString());
+                        cartItem.DiscountPercent = decimal.Parse(reader["DiscountPercent"].ToString());
+                        CartItems.Add(cartItem);
                     }
                 }
             }
-        }
-
-        public IActionResult OnPostAddToCart(int id)
-        {
-            // Insert the product into the cart table in the database
-            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
-            {
-                string sql = "INSERT INTO Cart (ProductId) VALUES (@productId)"; // Update the SQL query based on your database schema
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@productId", id);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-            return RedirectToPage();
         }
     }
 }
