@@ -18,34 +18,17 @@ namespace System_Shopper.Pages.System_Builder
         {
             PopulateShoppingSession();
             PopulateSystemList();
-//            InsertProductList(id);
             AddProductToProductList(id);
 
             return RedirectToPage("/System Builder/Index");
         }
 
-        /*
-        public void InsertProductList(int id)
-        {
-            using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
-            {
-                string sql = "INSERT INTO ProductList (SystemListID, ProductID) VALUES (@systemListId, @productId)";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
-                cmd.Parameters.AddWithValue("@productId", id);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-        }
-        */
-
         public void PopulateShoppingSession()
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT TOP 1 * FROM ShoppingSession WHERE UserID = 1 ORDER BY ShoppingSessionID DESC";
+                string sql = "SELECT TOP 1 * FROM ShoppingSession WHERE UserID = 1 " +
+                    "ORDER BY ShoppingSessionID DESC";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -65,7 +48,8 @@ namespace System_Shopper.Pages.System_Builder
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT * FROM SystemList WHERE EXISTS(SELECT * FROM SystemList WHERE ShoppingSessionID = @shoppingSessionId)";
+                string sql = "SELECT * FROM SystemList WHERE EXISTS(SELECT * FROM SystemList " +
+                    "WHERE ShoppingSessionID = @shoppingSessionId)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
@@ -119,7 +103,8 @@ namespace System_Shopper.Pages.System_Builder
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
                 // Check if ProductList contains id
-                string sql = "SELECT * FROM ProductList WHERE EXISTS(SELECT * FROM ProductList WHERE SystemListID = @systemListId AND ProductID = @productId)";
+                string sql = "SELECT * FROM ProductList WHERE EXISTS(SELECT * FROM ProductList " +
+                    "WHERE SystemListID = @systemListId AND ProductID = @productId)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
@@ -133,11 +118,7 @@ namespace System_Shopper.Pages.System_Builder
                 {
                     while (reader.Read())
                     {
-                        if (reader.IsDBNull(reader.GetOrdinal("Quantity")))
-                        {
-                            quantity = 0;
-                        }
-                        else
+                        if (!reader.IsDBNull(reader.GetOrdinal("Quantity")))
                         {
                             quantity = int.Parse(reader["Quantity"].ToString());
                         }
@@ -148,10 +129,11 @@ namespace System_Shopper.Pages.System_Builder
                 // If true, increment quantity
                 if (quantity > 0)
                 {
-                    sql = "UPDATE ProductList SET Quantity = @quantity WHERE ProductID = @productId";
+                    sql = "UPDATE ProductList SET Quantity = @quantity WHERE SystemListID = @systemListId " +
+                        "AND ProductID = @productId";
 
                     SqlCommand cmd2 = new SqlCommand(sql, conn);
-
+                    cmd2.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                     cmd2.Parameters.AddWithValue("@quantity", quantity + 1);
                     cmd2.Parameters.AddWithValue("@productId", id);
 
@@ -160,7 +142,8 @@ namespace System_Shopper.Pages.System_Builder
                 // Else, insert new ProductList
                 else
                 {
-                    sql = "INSERT INTO ProductList (SystemListID, ProductID, Quantity) VALUES (@systemListId, @productId, @quantity)";
+                    sql = "INSERT INTO ProductList (SystemListID, ProductID, Quantity) " +
+                        "VALUES (@systemListId, @productId, @quantity)";
 
                     SqlCommand cmd3 = new SqlCommand(sql, conn);
                     cmd3.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);

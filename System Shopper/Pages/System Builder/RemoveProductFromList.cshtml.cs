@@ -122,8 +122,9 @@ namespace System_Shopper.Pages.System_Builder
                 // If quantity > 1, update quantity - 1
                 if (quantity > 1)
                 {
-                    sql = "UPDATE ProductList SET Quantity = @quantity WHERE ProductID = @productId";
+                    sql = "UPDATE ProductList SET Quantity = @quantity WHERE SystemListID = @systemListId AND ProductID = @productId";
                     SqlCommand cmd2 = new SqlCommand(sql, conn);
+                    cmd2.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                     cmd2.Parameters.AddWithValue("@quantity", quantity - 1);
                     cmd2.Parameters.AddWithValue("@productId", id);
 
@@ -132,9 +133,10 @@ namespace System_Shopper.Pages.System_Builder
                 // Else, delete ProductList
                 else
                 {
-                    sql = "DELETE FROM ProductList WHERE ProductID = @productId";
+                    sql = "DELETE FROM ProductList WHERE SystemListID = @systemListId AND ProductID = @productId";
 
                     SqlCommand cmd3 = new SqlCommand(sql, conn);
+                    cmd3.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
                     cmd3.Parameters.AddWithValue("@productId", id);
 
                     cmd3.ExecuteNonQuery();

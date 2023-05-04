@@ -26,7 +26,8 @@ namespace System_Shopper.Pages.Cart
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "SELECT TOP 1 * FROM ShoppingSession WHERE UserID = 1 ORDER BY ShoppingSessionID DESC";
+                string sql = "SELECT TOP 1 * FROM ShoppingSession WHERE UserID = 1 " +
+                    "ORDER BY ShoppingSessionID DESC";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -46,17 +47,58 @@ namespace System_Shopper.Pages.Cart
         {
             using (SqlConnection conn = new SqlConnection(DBHelper.GetConnectionString()))
             {
-                string sql = "INSERT INTO Cart (ShoppingSessionID, ProductID, Quantity) VALUES (@shoppingSessionId, @productId, @quantity)";
+                // Check if Cart contains id
+                string sql = "SELECT * FROM Cart WHERE EXISTS " +
+                    "(SELECT * FROM Cart WHERE ShoppingSessionID = @shoppingSessionId " +
+                    "AND ProductID = @productId)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
-                cmd.Parameters.AddWithValue("@productId", id);
-                cmd.Parameters.AddWithValue("@quantity", 1);
+                cmd.Parameters.AddWithValue("productId", id);
 
                 conn.Open();
-                cmd.ExecuteNonQuery();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                int quantity = 0;
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        if (!reader.IsDBNull(reader.GetOrdinal("Quantity")))
+                        {
+                            quantity = int.Parse(reader["Quantity"].ToString());
+                        }
+                    }
+                }
+                reader.Close();
+
+                // If true, increment quantity
+                if (quantity > 0)
+                {
+                    sql = "UPDATE Cart SET Quantity = @quantity WHERE ShoppingSessionID = @shoppingSessionId " +
+                        "AND ProductID = @productId";
+
+                    SqlCommand cmd2 = new SqlCommand(sql, conn);
+                    cmd2.Parameters.AddWithValue("@quantity", quantity + 1);
+                    cmd2.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
+                    cmd2.Parameters.AddWithValue("@productId", id);
+
+                    cmd2.ExecuteNonQuery();
+                }
+                // Else, insert new Cart
+                else
+                {
+                    sql = "INSERT INTO Cart (ShoppingSessionID, ProductID, Quantity) " +
+                        "VALUES (@shoppingSessionId, @productId, @quantity)";
+
+                    SqlCommand cmd3 = new SqlCommand(sql, conn);
+                    cmd3.Parameters.AddWithValue("@shoppingSessionId", ShoppingSession.ShoppingSessionId);
+                    cmd3.Parameters.AddWithValue("@productId", id);
+                    cmd3.Parameters.AddWithValue("@quantity", 1);
+
+                    cmd3.ExecuteNonQuery();
+                }
             }
         }
-
     }
 }
