@@ -8,6 +8,7 @@
     }
 }
 
+<!--
 <script type="text/javascript">
 
     const SystemListOut = [
@@ -41,6 +42,7 @@
         }
     });
 </script>
+-->
 
 <div class="container">
     <!-- Title -->
@@ -49,56 +51,57 @@
             <h2 style="color: #1D2F6F"><i class="bi bi-bricks"></i> System Builder</h2>
         </div>
     </div>
-    <!-- Filters -->
+    <!--
     <div class="row">
-        <div class="col-sm-8">
-            <h4>Filters:</h4>
-            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">A-Z</a>
-            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Z-A</a>
-            <a class="px-2" style="border-right-style: solid; border-color: #8390FA; text-decoration: none">Price</a>
-        </div>
-        <!-- <div style="background-color: #8390FA" class="col-sm-4 mt-3">
-             <div id="ListTrigger">System Items</div>
-        </div> -->
+        <div style="background-color: #8390FA" class="col-sm-4 mt-3">
+            <div id="ListTrigger">System Items</div>
+        </div> 
     </div>
+    -->
     <div class="row">
-        <!-- Categories -->
         <div class="col-sm-2 mt-2">
             <form method="post">
+                <h4>Filters:</h4>   
+                <!-- Filters -->
+                <input type="radio" name="alpha" id="filterAZ" value="AZ" />
+                <label for="filterAZ">Name A - Z</label><br />
+                <input type="radio" name="alpha" id="filterZA" value="ZA" />
+                <label for="filterZA">Name Z - A</label><br />
+                <input type="radio" name="price" id="filterHighLow" value="HighLow" />
+                <label for="filterHighLow">Price High - Low</label><br />
+                <input type="radio" name="price" id="filterLowHigh" value="LowHigh" />
+                <label for="filterLowHigh">Price Low - High</label><br />
+                <br />
+                <!-- Categories -->
                 <input type="checkbox" id="filterCase" value="Case" />
-                <label for="filterCase">Computer Cases</label>
-                <br />
+                <label for="filterCase">Computer Cases</label><br />
                 <input type="checkbox" id="filterCPU" value="CPU" />
-                <label for="filterCPU">CPUs</label>
-                <br />
+                <label for="filterCPU">CPUs</label><br />
                 <input type="checkbox" id="filterCooler" value="Coolers" />
-                <label for="filterCooler">CPU Coolers</label>
-                <br />
+                <label for="filterCooler">CPU Coolers</label><br />
                 <input type="checkbox" id="filterGPU" value="GPU" />
-                <label for="filterGPU">Graphics Cards</label>
-                <br />
+                <label for="filterGPU">Graphics Cards</label><br />
                 <input type="checkbox" id="filterMotherboard" value="Motherboard" />
-                <label for="filterMotherboard">Motherboard</label>
-                <br />
+                <label for="filterMotherboard">Motherboard</label><br />
                 <input type="checkbox" id="filterRAM" value="RAM" />
-                <label for="filterRAM">Memory</label>
-                <br />
+                <label for="filterRAM">Memory</label><br />
                 <input type="checkbox" id="filterStorage" value="Storage" />
-                <label for="filterStorage">Storage</label>
-                <br />
+                <label for="filterStorage">Storage</label><br />
                 <input type="checkbox" id="filterPSU" value="PSU" />
-                <label for="filterPSU">Power Supply</label>
+                <label for="filterPSU">Power Supply</label><br />
 
-                <!--<ul>
-                    <li>Cases</li>
-                    <li>CPUs</li>
-                    <li>Coolers</li>
-                    <li>Graphics Cards</li>
-                    <li>Motherboards</li>
-                    <li>RAM</li>
-                    <li>Storage</li>
-                    <li>Power Supplies</li>
-                </ul>-->
+                <button style="background-color: #FAC748;" class="btn mb-1 mr-1" type="submit"><b>Filter</b></button>
+                <button style="background-color: #FAC748;" class="btn mb-1"><b>Clear</b></button>
+                <!--
+                Cases
+                CPUs
+                Coolers
+                Graphics Cards
+                Motherboards
+                RAM
+                Storage
+                Power Supplies
+                -->
             </form>
         </div>
         <!-- Products -->
@@ -108,23 +111,23 @@
                 <!--Product List-->
                 <div style="border-style: solid; border-color: #1D2F6F; display: inline-block" class="col-5 mb-3 p-2 rounded">
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <!-- Product Image and Price-->
                             <img style="width: 150px;" class="img-fluid" src="@product.ProductImage" alt="Product Image" /> 
                             <h3>$<b>@product.Price</b></h3>
                         </div>
                         <!-- Product Information -->
-                        <div class="col-sm-7">
+                        <div class="col-sm-8">
                             <!-- Product Name -->
                             <div class="row">
                                 <h6>@product.ProductName</h6>
                             </div>
-                            <div class="col-sm-9">
-                                <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/AddProductToList" asp-route-id="@product.ProductId" class="btn mb-3">
-                                    <i class="bi bi-plus mx-1"></i> Add To System
+                            <div class="col-sm-12">
+                                <a type="submit" style="background-color: #FAC748;" asp-page="/System Builder/AddProductToList" asp-route-id="@product.ProductId" class="btn mb-1">
+                                    <i class="bi bi-plus mx-1"></i> <b>Add To System</b>
                                 </a>
-                                <a type="submit" style="background-color: #28a745;" asp-page="/Cart/AddToCart" asp-route-id="@product.ProductId" class="btn mb-3">
-                                    <i class="bi bi-cart-plus mx-1"></i> Add To Cart
+                                <a type="submit" style="background-color: #28a745;" asp-page="/Cart/AddToCart" asp-route-id="@product.ProductId" class="btn mb-1">
+                                    <i class="bi bi-cart-plus mx-1"></i> <b>Add To Cart</b>
                                 </a>
                             </div>
 
@@ -135,6 +138,7 @@
         </div>
     </div>
     <!-- TEST Display system list quantities -->
+    @*
     <div class="row">
         <div class="col-6">
             @foreach (var productList in Model.ProductList)
@@ -143,6 +147,7 @@
             }
         </div>
     </div>
+    *@
     <!-- System List -->
     <div id="SystemListLabel" style="background-color: #8390FA" class="p-1">
         <h5>Your System: </h5>

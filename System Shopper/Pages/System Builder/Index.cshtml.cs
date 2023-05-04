@@ -208,21 +208,8 @@ namespace System_Shopper.Pages.System_Builder
 
         public IActionResult OnPost(int id)
         {
-            /*
-            using (SqlConnection conn = new SqlConnection( DBHelper.GetConnectionString()))
-            {
-                string sql = "INSERT INTO ProductList (SystemListID, ProductID) VALUES (@systemListId, @productId)";
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@systemListId", SystemList.SystemListId);
-                cmd.Parameters.AddWithValue("@productId", id);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-            */
             return Page();
-            
         }
     }
 }
