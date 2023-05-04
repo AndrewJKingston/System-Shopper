@@ -8,6 +8,7 @@ using System_Shopper.Models;
 
 namespace System_Shopper.Pages
 {
+    [Authorize]
     public class DeleteProductModel : PageModel
     {
         [BindProperty]
