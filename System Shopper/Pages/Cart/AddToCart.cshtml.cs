@@ -19,7 +19,7 @@ namespace System_Shopper.Pages.Cart
             PopulateShoppingSession();
             AddProductToCart(id);
 
-            return RedirectToPage("/Cart/Cart");
+            return RedirectToPage("/System Builder/Index");
         }
 
         public void PopulateShoppingSession()
